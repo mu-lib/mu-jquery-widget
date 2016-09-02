@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/mu-lib/mu-jquery-widget/compare/v2.0.0...v2.1.0) (2016-09-02)
+
+
+### Features
+
+* added jquery.weave ([70800e5](https://github.com/mu-lib/mu-jquery-widget/commit/70800e5))
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/mu-lib/mu-jquery-widget/compare/v1.0.0...v2.0.0) (2016-09-02)
 
