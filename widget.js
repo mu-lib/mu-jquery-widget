@@ -13,7 +13,7 @@
       .map(function(type) {
         return type + "." + ns;
       })
-      .join(" ")
+      .join(" ");
   }
 
   return [
