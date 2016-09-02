@@ -1,0 +1,17 @@
+{
+  "name": "mu-jquery-widget",
+  "authors": [
+    "Mikael Karon <mikael@karon.se>"
+  ],
+  "description": "A jQuery widget",
+  "main": "jquery.widget.js",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
