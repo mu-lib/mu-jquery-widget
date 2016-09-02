@@ -4,7 +4,7 @@
     "Mikael Karon <mikael@karon.se>"
   ],
   "description": "A jQuery widget",
-  "main": "jquery.widget.js",
+  "main": "widget.js",
   "license": "MIT",
   "homepage": "",
   "ignore": [
