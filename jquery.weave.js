@@ -16,6 +16,7 @@
 ], this, function($, wire) {
   var slice = Array.prototype.slice;
   var bind = Function.prototype.bind;
+  var re = /@\d+$/;
   var count = 0;
 
   function create(c, args) {
@@ -28,7 +29,7 @@
     return wire.call(this, attr, function(module, index) {
       var self = this;
 
-      return $.when(callback.call(self, module, index)).then(function(result) {
+      return re.test(module) ? module : $.when(callback.call(self, module, index)).then(function(result) {
         var $element;
 
         if ($.type(result) === "function") {
