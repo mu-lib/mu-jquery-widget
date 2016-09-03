@@ -10,7 +10,7 @@
         }[m] || root[m];
     }));
   }
-}([
+})([
   "jquery",
   "mu-jquery-wire/jquery.wire"
 ], this, function($, wire) {
@@ -47,4 +47,4 @@
       });
     });
   }
-}));
+});

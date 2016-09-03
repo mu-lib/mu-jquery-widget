@@ -6,7 +6,7 @@
   } else {
     root["mu-jquery-widget/widget"] = factory(root.jQuery);
   }
-}(["jquery"], this, function($) {
+})(["jquery"], this, function($) {
   function name(ns) {
     return this
       .split(/\s+/)
@@ -52,4 +52,4 @@
       }
     }
   ]
-}));
+});
