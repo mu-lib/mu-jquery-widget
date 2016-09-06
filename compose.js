@@ -11,10 +11,11 @@
     }));
   }
 })(["mu-compose/regexp"], this, function(regexp) {
-  return regexp(/^(on|attr|prop)\/(.+)/, function(result, data, method, type) {
+  return regexp(/^(on|attr|prop)\/(.+?)(?:\((.*)\))?$/, function(result, data, method, type, args) {
     (result.dom = result.dom || []).push({
       "method": method,
       "type": type,
+      "args": args,
       "value": data.value
     });
 
