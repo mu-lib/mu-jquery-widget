@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.3.0"></a>
+# [2.3.0](https://github.com/mu-lib/mu-jquery-widget/compare/v2.2.0...v2.3.0) (2016-09-06)
+
+
+### Features
+
+* Added support for selector and data ([383511a](https://github.com/mu-lib/mu-jquery-widget/commit/383511a))
+
+
+
 <a name="2.2.0"></a>
 # [2.2.0](https://github.com/mu-lib/mu-jquery-widget/compare/v2.1.1...v2.2.0) (2016-09-03)
 
