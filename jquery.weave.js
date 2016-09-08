@@ -2,12 +2,12 @@
   if (typeof define === "function" && define.amd) {
     define(modules, factory);
   } else if (typeof module === "object" && module.exports) {
-    module.exports = factory.apply(root, modules);
+    module.exports = factory.apply(root, modules.map(require));
   } else {
     root["mu-jquery-widget/jquery.weave"] = factory.apply(root, modules.map(function(m) {
       return {
-          "jquery": jQuery
-        }[m] || root[m];
+        "jquery": root.jQuery
+      }[m] || root[m];
     }));
   }
 })([
