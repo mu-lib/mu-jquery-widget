@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.2.0"></a>
+# [3.2.0](https://github.com/mu-lib/mu-jquery-widget/compare/v3.1.0...v3.2.0) (2016-09-12)
+
+
+### Features
+
+* bumped mu-compose ([da688ff](https://github.com/mu-lib/mu-jquery-widget/commit/da688ff))
+
+
+
 <a name="3.1.0"></a>
 # [3.1.0](https://github.com/mu-lib/mu-jquery-widget/compare/v3.0.0...v3.1.0) (2016-09-12)
 
