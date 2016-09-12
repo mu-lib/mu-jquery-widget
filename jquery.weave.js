@@ -12,21 +12,30 @@
   }
 })([
   "jquery",
-  "./jquery.create",
+  "./jquery.twist",
   "mu-jquery-crank/jquery.crank"
-], this, function($, create, crank) {
+], this, function($, twist, crank) {
   var slice = Array.prototype.slice;
-  var re = /\s+/;
+
+  function collect() {
+    return slice.call(arguments);
+  }
+
+  function ns(widget) {
+    return widget.ns;
+  }
+
+  function initialize(widgets, index) {
+    return widgets && crank.call(widgets[0].$element, $.map(widgets, ns), "initialize").then(function() {
+      return widgets;
+    });
+  }
+
+  function weave(result) {
+    return $.when.apply(null, $.map(result, initialize)).then(collect);
+  }
 
   return function() {
-    var self = this;
-    
-    return create.apply(this, slice.call(arguments)).then(function() {
-      return $.when.apply(null, $.map(slice.call(arguments), function(widget, index) {
-        return crank.call(self.eq(index), function() {
-          return $.map($.isArray(widget) ? widget : [widget], function (w) { return w.ns; });;
-        }, "initialize");
-      }));
-    });
+    return twist.apply(this, slice.call(arguments)).then(weave);
   }
 });
