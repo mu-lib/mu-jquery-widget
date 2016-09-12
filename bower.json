@@ -14,7 +14,7 @@
   ],
   "dependencies": {
     "jquery": "^3.1.0",
-    "mu-compose": "^2.1.0",
+    "mu-compose": "^2.1.1",
     "mu-jquery-wire": "^5.0.0",
     "mu-jquery-crank": "^3.0.0"
   },
