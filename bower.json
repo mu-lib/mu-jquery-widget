@@ -17,5 +17,8 @@
     "mu-compose": "^2.1.0",
     "mu-jquery-wire": "^5.0.0",
     "mu-jquery-crank": "^3.0.0"
+  },
+  "devDependencies": {
+    "qunit": "^2.0.1"
   }
 }
