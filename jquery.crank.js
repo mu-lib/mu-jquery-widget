@@ -18,8 +18,8 @@
   var re = /\s+/;
 
   return function (attr) {
-      return crank.apply(this, [function(element) {
-        return ($(element).attr(attr) || "").split(re);
+      return crank.apply(this, [function($element) {
+        return ($element.attr(attr) || "").split(re);
       }].concat(slice.call(arguments, 1)));
   }
 });

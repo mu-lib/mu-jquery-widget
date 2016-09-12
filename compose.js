@@ -5,18 +5,14 @@
     module.exports = factory.apply(root, modules.map(require));
   } else {
     root["mu-jquery-widget/compose"] = factory.apply(root, modules.map(function(m) {
-      return root[m];
+      return root[m.replace(/^\./, "mu-jquery-widget")];
     }));
   }
-})(["mu-compose/regexp"], this, function(regexp) {
-  return regexp(/^(on|attr|prop)\/(.+?)(?:\((.*)\))?$/, function(result, data, method, type, args) {
-    (result.dom = result.dom || []).push({
-      "method": method,
-      "type": type,
-      "args": args,
-      "value": data.value
-    });
-
-    return false;
-  });
+})([
+  "mu-compose/compose",
+  "mu-compose/constructor",
+  "mu-compose/prototype",
+  "./dom"
+], this, function(compose, construct, proto, dom) {
+    return compose(construct, proto, dom);
 });

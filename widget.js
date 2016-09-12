@@ -11,9 +11,11 @@
     }));
   }
 })(["jquery"], this, function($) {
+  var re = /\s+/;
+
   function name(ns) {
     return this
-      .split(/\s+/)
+      .split(re)
       .map(function(type) {
         return type + "." + ns;
       })
