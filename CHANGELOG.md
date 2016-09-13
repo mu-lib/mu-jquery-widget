@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/mu-lib/mu-jquery-widget/compare/v3.3.0...v4.0.0) (2016-09-13)
+
+
+### Features
+
+* break out sub-components ([7bbfc98](https://github.com/mu-lib/mu-jquery-widget/commit/7bbfc98))
+
+
+### BREAKING CHANGES
+
+* we broke out some components into
+mu-lib/mu-jquery-component, developers please update your code
+accordingly.
+
+
+
 <a name="3.3.0"></a>
 # [3.3.0](https://github.com/mu-lib/mu-jquery-widget/compare/v3.2.0...v3.3.0) (2016-09-13)
 
