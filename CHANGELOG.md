@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.0.0"></a>
+# [5.0.0](https://github.com/mu-lib/mu-jquery-widget/compare/v4.0.0...v5.0.0) (2016-09-13)
+
+
+### Features
+
+* dep rename ([fb6a726](https://github.com/mu-lib/mu-jquery-widget/commit/fb6a726))
+
+
+### BREAKING CHANGES
+
+* While renaming mu-compose to mu-create we also renamed
+the mirrored compose.js to create.js.
+
+
+
 <a name="4.0.0"></a>
 # [4.0.0](https://github.com/mu-lib/mu-jquery-widget/compare/v3.3.0...v4.0.0) (2016-09-13)
 
