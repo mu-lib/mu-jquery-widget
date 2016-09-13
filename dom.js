@@ -8,7 +8,7 @@
       return root[m];
     }));
   }
-})(["mu-compose/regexp"], this, function(regexp) {
+})(["mu-create/regexp"], this, function(regexp) {
   return regexp(/^(on|attr|prop)\/(.+?)(?:\((.*)\))?$/, function(result, data, method, type, args) {
     (result.dom = result.dom || []).push({
       "method": method,
