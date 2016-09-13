@@ -1,8 +1,8 @@
 {
   "name": "mu-jquery-widget",
   "version": "3.3.0",
-  "description": "A jQuery widget",
-  "main": "jquery.widget.js",
+  "description": "mu-compose jQuery widget",
+  "main": "main.js",
   "scripts": {
     "release": "standard-version"
   },
