@@ -1,6 +1,6 @@
 {
   "name": "mu-jquery-widget",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "description": "mu-compose jQuery widget",
   "main": "main.js",
   "scripts": {
