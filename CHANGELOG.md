@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.2.0"></a>
+# [5.2.0](https://github.com/mu-lib/mu-jquery-widget/compare/v5.1.0...v5.2.0) (2016-09-22)
+
+
+### Features
+
+* **deps:** bumped mu-create ([2bfd890](https://github.com/mu-lib/mu-jquery-widget/commit/2bfd890))
+
+
+
 <a name="5.1.0"></a>
 # [5.1.0](https://github.com/mu-lib/mu-jquery-widget/compare/v5.0.1...v5.1.0) (2016-09-15)
 
