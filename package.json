@@ -18,7 +18,7 @@
   "homepage": "https://github.com/mu-lib/mu-jquery-widget#readme",
   "dependencies": {
     "jquery": "^3.1.0",
-    "mu-create": "^4.0.0"
+    "mu-create": "^4.1.0"
   },
   "devDependencies": {
     "standard-version": "^2.4.0",
