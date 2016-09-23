@@ -12,6 +12,7 @@
   }
 })(["jquery"], this, function ($) {
   var re = /\s+/;
+  var result = [];
 
   function name(ns) {
     return this
@@ -22,53 +23,54 @@
       .join(" ");
   }
 
-  return [
-    function ($element, ns) {
+  result.push(result.widget = function($element, ns) {
+    var me = this;
+
+    me.ns = ns;
+    me.$element = $element;
+
+    $.each(me.constructor.dom, function (index, op) {
+      switch (op.method) {
+        case "on":
+          me.on(op.events, op.selector, op.data, op.handler);
+          break;
+
+        case "attr":
+        case "prop":
+          $element[op.method](op.name, op.value);
+          break;
+      }
+    });
+  });
+
+  result.push(result.blueprint = {
+    "on": function (events, selector, data, handler) {
       var me = this;
 
-      me.ns = ns;
-      me.$element = $element;
+      switch (arguments.length) {
+        case 3:
+          handler = data;
+          data = undefined;
+          break;
 
-      $.each(me.constructor.dom, function (index, op) {
-        switch (op.method) {
-          case "on":
-            me.on(op.events, op.selector, op.data, op.handler);
-            break;
+        case 2:
+          handler = selector;
+          selector = undefined;
+          data = undefined;
+          break;
 
-          case "attr":
-          case "prop":
-            $element[op.method](op.name, op.value);
-            break;
-        }
-      });
-    },
-    {
-      "on": function (events, selector, data, handler) {
-        var me = this;
-
-        switch (arguments.length) {
-          case 3:
-            handler = data;
-            data = undefined;
-            break;
-
-          case 2:
-            handler = selector;
-            selector = undefined;
-            data = undefined;
-            break;
-
-          case 1:
-            throw new Error("not enough arguments");
-        }
-
-        me.$element.on(name.call(events, me.ns), selector, data, $.proxy(handler, me));
-      },
-      "off": function (events, selector, handler) {
-        var me = this;
-
-        me.$element.off(name.call(events, me.ns), selector, handler);
+        case 1:
+          throw new Error("not enough arguments");
       }
+
+      me.$element.on(name.call(events, me.ns), selector, data, $.proxy(handler, me));
+    },
+    "off": function (events, selector, handler) {
+      var me = this;
+
+      me.$element.off(name.call(events, me.ns), selector, handler);
     }
-  ]
+  });
+  
+  return result;
 });
