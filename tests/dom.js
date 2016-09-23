@@ -6,16 +6,14 @@
   } else {
     root["mu-jquery-widget/tests/dom"] = factory.apply(root, modules.map(function (m) {
       return {
-        "jquery": root.jQuery,
         "qunit": root.QUnit
       }[m = m.replace(/^\.{2}/, "mu-jquery-widget")] || root[m];
     }));
   }
 })([
   "qunit",
-  "jquery",
   "../dom",
-], this, function (QUnit, $, dom) {
+], this, function (QUnit, dom) {
   var root = this;
 
   QUnit.module("mu-jquery-dom/dom");
