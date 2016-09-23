@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="6.0.0"></a>
+# [6.0.0](https://github.com/mu-lib/mu-jquery-widget/compare/v5.2.0...v6.0.0) (2016-09-23)
+
+
+### Features
+
+* **widget:** Export constructor and blueprint together but separately. ([4ba5b17](https://github.com/mu-lib/mu-jquery-widget/commit/4ba5b17))
+
+
+* Removed create.js ([f69c5d6](https://github.com/mu-lib/mu-jquery-widget/commit/f69c5d6))
+
+
+### BREAKING CHANGES
+
+* We no longer provide a configured create module as it's
+shown itself to be unsused by downstream developers.
+
+
+
 <a name="5.2.0"></a>
 # [5.2.0](https://github.com/mu-lib/mu-jquery-widget/compare/v5.1.0...v5.2.0) (2016-09-22)
 
