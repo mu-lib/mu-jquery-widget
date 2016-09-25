@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="7.0.0"></a>
+# [7.0.0](https://github.com/mu-lib/mu-jquery-widget/compare/v6.0.0...v7.0.0) (2016-09-25)
+
+
+### Features
+
+* **widget:** revert on exposing .widget and .blueprint separately ([a20a5b2](https://github.com/mu-lib/mu-jquery-widget/commit/a20a5b2))
+
+
+### BREAKING CHANGES
+
+* widget: We no longer expose `widget.widget` and
+`widget.blueprints`.
+
+
+
 <a name="6.0.0"></a>
 # [6.0.0](https://github.com/mu-lib/mu-jquery-widget/compare/v5.2.0...v6.0.0) (2016-09-23)
 
