@@ -12,7 +12,6 @@
   }
 })(["jquery"], this, function ($) {
   var re = /\s+/;
-  var result = [];
 
   function name(ns) {
     return this
@@ -23,7 +22,7 @@
       .join(" ");
   }
 
-  result.push(result.widget = function($element, ns) {
+  return [function($element, ns) {
     var me = this;
 
     me.ns = ns;
@@ -41,9 +40,7 @@
           break;
       }
     });
-  });
-
-  result.push(result.blueprint = {
+  }, {
     "on": function (events, selector, data, handler) {
       var me = this;
 
@@ -70,7 +67,5 @@
 
       me.$element.off(name.call(events, me.ns), selector, handler);
     }
-  });
-  
-  return result;
+  }];
 });
