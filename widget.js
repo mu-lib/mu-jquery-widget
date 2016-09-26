@@ -22,7 +22,7 @@
       .join(" ");
   }
 
-  return [function($element, ns) {
+  return [function ($element, ns) {
     var me = this;
 
     me.ns = ns;
@@ -41,31 +41,30 @@
       }
     });
   }, {
-    "on": function (events, selector, data, handler) {
-      var me = this;
+      "on": function (events, selector, data, handler) {
+        var me = this;
 
-      switch (arguments.length) {
-        case 3:
-          handler = data;
-          data = undefined;
-          break;
+        switch (arguments.length) {
+          case 3:
+            handler = data;
+            data = undefined;
+            break;
 
-        case 2:
-          handler = selector;
-          selector = undefined;
-          data = undefined;
-          break;
+          case 2:
+            handler = selector;
+            selector = undefined;
+            data = undefined;
+            break;
 
-        case 1:
-          throw new Error("not enough arguments");
+          case 1:
+            throw new Error("not enough arguments");
+        }
+
+        me.$element.on(name.call(events, me.ns), selector, data, $.proxy(handler, me));
+      },
+      "off": function (events, selector, handler) {
+        var me = this;
+        me.$element.off(name.call(events, me.ns), selector, handler);
       }
-
-      me.$element.on(name.call(events, me.ns), selector, data, $.proxy(handler, me));
-    },
-    "off": function (events, selector, handler) {
-      var me = this;
-
-      me.$element.off(name.call(events, me.ns), selector, handler);
-    }
-  }];
+    }];
 });
