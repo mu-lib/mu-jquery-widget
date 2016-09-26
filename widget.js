@@ -11,11 +11,11 @@
     }));
   }
 })(["jquery"], this, function ($) {
-  var re = /\s+/;
+  var re_space = /\s+/;
 
   function name(ns) {
     return this
-      .split(re)
+      .split(re_space)
       .map(function (type) {
         return type + "." + ns;
       })
