@@ -5,10 +5,10 @@
     module.exports = factory.apply(root, modules.map(require));
   } else {
     root["mu-jquery-widget/tests/dom"] = factory.apply(root, modules.map(function (m) {
-      return {
+      return this[m] || root[m.replace(/^\.{2}/, "mu-jquery-widget")];
+    }, {
         "qunit": root.QUnit
-      }[m = m.replace(/^\.{2}/, "mu-jquery-widget")] || root[m];
-    }));
+      }));
   }
 })([
   "qunit",

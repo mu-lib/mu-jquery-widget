@@ -5,11 +5,11 @@
     module.exports = factory.apply(root, modules.map(require));
   } else {
     root["mu-jquery-widget/tests/widget"] = factory.apply(root, modules.map(function (m) {
-      return {
+      return this[m] || root[m.replace(/^\.{2}/, "mu-jquery-widget")];
+    }, {
         "jquery": root.jQuery,
         "qunit": root.QUnit
-      }[m = m.replace(/^\.{2}/, "mu-jquery-widget")] || root[m];
-    }));
+      }));
   }
 })([
   "qunit",
@@ -335,8 +335,8 @@
       },
       "on/test(.b)": function () {
         assert.notOk(true, "handler should never be called");
-        }
-      });
+      }
+    });
     var w = new W($element, "ns");
 
     $element.find("span").trigger("test");
@@ -452,13 +452,13 @@
     });
 
     var W = c(widget, {
-      "attr/name": function(index, value) {
+      "attr/name": function (index, value) {
         return value + "value" + index;
       }
     });
     var w = new W($element, "ns");
 
-    $element.each(function(index, element) {
+    $element.each(function (index, element) {
       assert.strictEqual($(element).attr("name"), "test" + (index + 1) + "value" + index, "attr matches");
     });
   });
@@ -502,13 +502,13 @@
     });
 
     var W = c(widget, {
-      "prop/name": function(index, value) {
+      "prop/name": function (index, value) {
         return value + "value" + index;
       }
     });
     var w = new W($element, "ns");
 
-    $element.each(function(index, element) {
+    $element.each(function (index, element) {
       assert.strictEqual($(element).prop("name"), "test" + (index + 1) + "value" + index, "prop matches");
     });
   });
