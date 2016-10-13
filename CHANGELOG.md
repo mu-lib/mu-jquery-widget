@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="7.0.1"></a>
+## [7.0.1](https://github.com/mu-lib/mu-jquery-widget/compare/v7.0.0...v7.0.1) (2016-10-13)
+
+
+### Bug Fixes
+
+* **packaging:** Updated package.json and buped deps ([2f2fb18](https://github.com/mu-lib/mu-jquery-widget/commit/2f2fb18))
+* **tests:** test cleanup ([7130c88](https://github.com/mu-lib/mu-jquery-widget/commit/7130c88))
+* UMD fixes and formatting ([62dd08d](https://github.com/mu-lib/mu-jquery-widget/commit/62dd08d))
+
+
+
 <a name="7.0.0"></a>
 # [7.0.0](https://github.com/mu-lib/mu-jquery-widget/compare/v6.0.0...v7.0.0) (2016-09-25)
 
