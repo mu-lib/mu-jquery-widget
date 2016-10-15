@@ -46,6 +46,148 @@
     assert.strictEqual(w.ns, ns, "ns matches");
   });
 
+  QUnit.module("mu-jquery-dom/widget#trigger");
+
+  QUnit.test("handler called", function (assert) {
+    assert.expect(2);
+
+    var $element = $("<div></div>");
+    var W = c(widget);
+    var w = new W($element, "ns");
+
+    function ok($event) {
+      assert.ok(true, "handler called");
+    }
+
+    $element
+      .on("test", function () {
+        assert.notOk(true, "handler should not be called");
+      })
+      .on("test." + w.ns, ok)
+      .appendTo($("<div></div>").on("test." + w.ns, ok));
+
+    w.trigger("test");
+  });
+
+  QUnit.test("extra parameters plain object", function (assert) {
+    assert.expect(6);
+
+    function ok($event, extraParams) {
+      assert.strictEqual(arguments.length, 2, "arguments.length matches");
+      assert.ok($event instanceof $.Event, "$event is an instance of $.Event");
+      assert.strictEqual(extraParams, o, "extraParams matches");
+    }
+
+    var $element = $("<div></div>");
+    var W = c(widget);
+    var w = new W($element, "ns");
+    var o = {};
+
+    $element
+      .on("test", function ($event) {
+        assert.notOk(true, "handler should not be called");
+      })
+      .on("test." + w.ns, ok)
+      .appendTo($("<div></div>").on("test." + w.ns, ok));
+
+    w.trigger("test", o);
+  });
+
+  QUnit.test("extra parameters array", function (assert) {
+    assert.expect(8);
+
+    function ok($event, one, _$element) {
+      assert.strictEqual(arguments.length, 3, "arguments.length matches");
+      assert.ok($event instanceof $.Event, "$event is an instance of $.Event");
+      assert.strictEqual(one, "one", "one matches");
+      assert.strictEqual(_$element, $element, "_$element matches");
+    }
+
+    var $element = $("<div></div>");
+    var W = c(widget);
+    var w = new W($element, "ns");
+
+    $element
+      .on("test", function ($event) {
+        assert.notOk(true, "handler should not be called");
+      })
+      .on("test." + w.ns, ok)
+      .appendTo($("<div></div>").on("test." + w.ns, ok));
+
+    w.trigger("test", ["one", $element]);
+  });
+
+  QUnit.module("mu-jquery-dom/widget#triggerHandler");
+
+  QUnit.test("handler called", function (assert) {
+    assert.expect(1);
+
+    function notOk() {
+      assert.notOk(true, "handler should not be called");
+    }
+
+    var $element = $("<div></div>");
+    var W = c(widget);
+    var w = new W($element, "ns");
+
+    $element
+      .on("test", notOk)
+      .on("test." + w.ns, function ok($event) {
+        assert.ok(true, "handler called");
+      })
+      .appendTo($("<div></div>").on("test." + w.ns, notOk));
+
+    w.triggerHandler("test");
+  });
+
+  QUnit.test("extra parameters plain object", function (assert) {
+    assert.expect(3);
+
+    function notOk() {
+      assert.notOk(true, "handler should not be called");
+    }
+
+    var $element = $("<div></div>");
+    var W = c(widget);
+    var w = new W($element, "ns");
+    var o = {};
+
+    $element
+      .on("test", notOk)
+      .on("test." + w.ns, function ok($event, extraParams) {
+        assert.strictEqual(arguments.length, 2, "arguments.length matches");
+        assert.ok($event instanceof $.Event, "$event is an instance of $.Event");
+        assert.strictEqual(extraParams, o, "extraParams matches");
+      })
+      .appendTo($("<div></div>").on("test." + w.ns, notOk));
+
+    w.triggerHandler("test", o);
+  });
+
+  QUnit.test("extra parameters array", function (assert) {
+    assert.expect(4);
+
+    function notOk() {
+      assert.notOk(true, "handler should not be called");
+    }
+
+    var $element = $("<div></div>");
+    var W = c(widget);
+    var w = new W($element, "ns");
+
+    $element
+      .on("test", notOk)
+      .on("test." + w.ns, function ok($event, one, _$element) {
+        assert.strictEqual(arguments.length, 3, "arguments.length matches");
+        assert.ok($event instanceof $.Event, "$event is an instance of $.Event");
+        assert.strictEqual(one, "one", "one matches");
+        assert.strictEqual(_$element, $element, "_$element matches");
+      })
+      .appendTo($("<div></div>").on("test." + w.ns, notOk));
+
+    w.triggerHandler("test", ["one", $element]);
+  });
+
   QUnit.module("mu-jquery-dom/widget#on");
 
   QUnit.test("handler called", function (assert) {
