@@ -196,6 +196,22 @@
     $element.trigger("test");
   });
 
+  QUnit.module("mu-jquery-dom/widget#one");
+
+  QUnit.test("handler called once", function (assert) {
+    assert.expect(1);
+
+    var $element = $("<div></div>");
+
+    var W = c(widget);
+    var w = new W($element, "ns");
+    w.one("test", function ($event) {
+      assert.ok(true, "handler called");
+    });
+
+    $element.trigger("test").trigger("test");
+  });
+
   QUnit.module("mu-jquery-dom/widget#off");
 
   QUnit.test("handlers removed", function (assert) {
@@ -411,6 +427,23 @@
     var w = new W($element, "ns");
 
     $element.trigger("test");
+  });
+
+  QUnit.module("mu-jquery-dom/widget#dom.one");
+
+  QUnit.test("one/event", function (assert) {
+    assert.expect(1);
+
+    var $element = $("<div></div>");
+
+    var W = c(widget, {
+      "one/test": function () {
+        assert.ok(true, "handler called");
+      }
+    });
+    var w = new W($element, "ns");
+
+    $element.trigger("test").trigger("test");
   });
 
   QUnit.module("mu-jquery-dom/widget#dom.attr");

@@ -22,26 +22,15 @@
       .join(" ");
   }
 
-  return [function ($element, ns) {
-    var me = this;
+  var widget = {
+    "off": function (events, selector, handler) {
+      var me = this;
+      me.$element.off(name.call(events, me.ns), selector, handler);
+    }
+  };
 
-    me.ns = ns;
-    me.$element = $element;
-
-    $.each(me.constructor.dom, function (index, op) {
-      switch (op.method) {
-        case "on":
-          me.on(op.events, op.selector, op.data, op.handler);
-          break;
-
-        case "attr":
-        case "prop":
-          $element[op.method](op.name, op.value);
-          break;
-      }
-    });
-  }, {
-    "on": function (events, selector, data, handler) {
+  ["on", "one"].forEach(function (op) {
+    this[op] = function (events, selector, data, handler) {
       var me = this;
 
       switch (arguments.length) {
@@ -60,11 +49,28 @@
           throw new Error("not enough arguments");
       }
 
-      me.$element.on(name.call(events, me.ns), selector, data, $.proxy(handler, me));
-    },
-    "off": function (events, selector, handler) {
-      var me = this;
-      me.$element.off(name.call(events, me.ns), selector, handler);
+      me.$element[op](name.call(events, me.ns), selector, data, $.proxy(handler, me));
     }
-  }];
+  }, widget);
+
+  return [function ($element, ns) {
+    var me = this;
+
+    me.ns = ns;
+    me.$element = $element;
+
+    $.each(me.constructor.dom, function (index, op) {
+      switch (op.method) {
+        case "on":
+        case "one":
+          me[op.method](op.events, op.selector, op.data, op.handler);
+          break;
+
+        case "attr":
+        case "prop":
+          $element[op.method](op.name, op.value);
+          break;
+      }
+    });
+  }, widget];
 });

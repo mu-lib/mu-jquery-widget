@@ -113,6 +113,53 @@
     }, "o.dom should match spec");
   });
 
+  QUnit.module("mu-jquery-dom/dom#one");
+
+  QUnit.test("default object value", function (assert) {
+    var o = {};
+
+    assert.expect(1);
+
+    dom(o, {
+      "key": "one/events(selector)",
+      "value": {
+        "custom": "value"
+      }
+    });
+
+    assert.deepEqual(o, {
+      "dom": [{
+        "method": "one",
+        "events": "events",
+        "selector": "selector",
+        "custom": "value"
+      }]
+    }, "o.dom should match spec");
+  });
+
+  QUnit.test("override object value", function (assert) {
+    var o = {};
+
+    assert.expect(1);
+
+    dom(o, {
+      "key": "on/events(selector)",
+      "value": {
+        "events": undefined,
+        "custom": "value"
+      }
+    });
+
+    assert.deepEqual(o, {
+      "dom": [{
+        "method": "on",
+        "events": undefined,
+        "selector": "selector",
+        "custom": "value"
+      }]
+    }, "o.dom should match spec");
+  });
+
   QUnit.module("mu-jquery-dom/dom#attr");
 
   QUnit.test("value", function (assert) {
