@@ -115,6 +115,26 @@
 
   QUnit.module("mu-jquery-dom/dom#one");
 
+  QUnit.test("handler value", function (assert) {
+    var o = {};
+
+    assert.expect(1);
+
+    dom(o, {
+      "key": "one/events(selector)",
+      "value": "handler"
+    });
+
+    assert.deepEqual(o, {
+      "dom": [{
+        "events": "events",
+        "handler": "handler",
+        "method": "one",
+        "selector": "selector"
+      }]
+    }, "o.dom should match spec");
+  });
+
   QUnit.test("default object value", function (assert) {
     var o = {};
 

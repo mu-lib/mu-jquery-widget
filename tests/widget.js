@@ -49,23 +49,26 @@
   QUnit.module("mu-jquery-dom/widget#on");
 
   QUnit.test("handler called", function (assert) {
-    assert.expect(2);
+    assert.expect(4);
 
     var $element = $("<div></div>");
-
     var W = c(widget);
     var w = new W($element, "ns");
+
     w.on("test", function ($event) {
       assert.ok(true, "handler called");
     });
     w.on("test", function () {
       assert.ok(true, "handler called");
     });
-    $element.trigger("test");
+
+    $element
+      .trigger("test")
+      .trigger("test");
   });
 
   QUnit.test("handler called when trigger on child", function (assert) {
-    assert.expect(1);
+    assert.expect(4);
 
     var $element = $("<div><span></span></div>");
 
@@ -74,7 +77,14 @@
     w.on("test", function () {
       assert.ok(true, "handler called");
     });
-    $element.find("span").trigger("test");
+    w.on("test", function () {
+      assert.ok(true, "handler called");
+    });
+
+    $element
+      .find("span")
+      .trigger("test")
+      .trigger("test");
   });
 
   QUnit.test("handler called with ns", function (assert) {
@@ -148,7 +158,9 @@
       assert.ok(true, "handler called");
     });
 
-    $element.trigger("test1").trigger("test2");
+    $element
+      .trigger("test1")
+      .trigger("test2");
   });
 
   QUnit.test("args.selector filters sub events", function (assert) {
@@ -165,7 +177,9 @@
       assert.ok(true, "handler called");
     });
 
-    $element.find("span").trigger("test");
+    $element
+      .find("span")
+      .trigger("test");
   });
 
   QUnit.test("args.selector can be falsy", function (assert) {
@@ -199,17 +213,172 @@
   QUnit.module("mu-jquery-dom/widget#one");
 
   QUnit.test("handler called once", function (assert) {
+    assert.expect(2);
+
+    var $element = $("<div></div>");
+    var W = c(widget);
+    var w = new W($element, "ns");
+
+    w.one("test", function ($event) {
+      assert.ok(true, "handler called");
+    });
+    w.one("test", function () {
+      assert.ok(true, "handler called");
+    });
+
+    $element
+      .trigger("test")
+      .trigger("test");
+  });
+
+  QUnit.test("handler called once when trigger on child", function (assert) {
+    assert.expect(2);
+
+    var $element = $("<div><span></span></div>");
+
+    var W = c(widget);
+    var w = new W($element, "ns");
+    w.one("test", function () {
+      assert.ok(true, "handler called");
+    });
+    w.one("test", function () {
+      assert.ok(true, "handler called");
+    });
+
+    $element
+      .find("span")
+      .trigger("test")
+      .trigger("test");
+  });
+
+  QUnit.test("handler called once with ns", function (assert) {
+    assert.expect(1);
+
+    var $element = $("<div></div>");
+    var ns = "ns";
+
+    var W = c(widget);
+    var w = new W($element, ns);
+    w.one("test." + ns, function () {
+      assert.ok(true, "handler called");
+    });
+    $element.trigger("test");
+  });
+
+  QUnit.test("handler called once in scope", function (assert) {
     assert.expect(1);
 
     var $element = $("<div></div>");
 
     var W = c(widget);
     var w = new W($element, "ns");
-    w.one("test", function ($event) {
+    w.one("test", function () {
+      assert.strictEqual(this, w, "scope matches");
+    });
+    $element.trigger("test");
+  });
+
+  QUnit.test("handler called once with default arguments", function (assert) {
+    assert.expect(2);
+
+    var $element = $("<div></div>");
+    var ns = "ns";
+
+    var W = c(widget);
+    var w = new W($element, ns);
+    w.one("test." + ns, function ($event) {
+      assert.strictEqual(arguments.length, 1, "arguments.length matches");
+      assert.ok($event instanceof $.Event, "$event is an instance of $.Event");
+    });
+    $element.trigger("test");
+  });
+
+  QUnit.test("handler called once with extra arguments", function (assert) {
+    assert.expect(5);
+
+    var $element = $("<div></div>");
+    var ns = "ns";
+
+    var W = c(widget);
+    var w = new W($element, ns);
+    w.one("test." + ns, function ($event, one, _ns, _$element) {
+      assert.strictEqual(arguments.length, 4, "arguments.length matches");
+      assert.ok($event instanceof $.Event, "$event is an instance of $.Event");
+      assert.strictEqual(one, 1, "one matches");
+      assert.strictEqual(_ns, ns, "_ns matches");
+      assert.strictEqual(_$element, $element, "_$element matches");
+    });
+    $element.trigger("test", [1, ns, $element]);
+  });
+
+  QUnit.test("args.events can be multiple", function (assert) {
+    assert.expect(2);
+
+    var $element = $("<div></div>");
+
+    var W = c(widget);
+    var w = new W($element, "ns");
+    w.one("test1 test2", function () {
       assert.ok(true, "handler called");
     });
 
-    $element.trigger("test").trigger("test");
+    $element
+      .trigger("test1")
+      .trigger("test2")
+      .trigger("test1")
+      .trigger("test2");
+  });
+
+  QUnit.test("args.selector filters sub events", function (assert) {
+    assert.expect(1);
+
+    var $element = $("<div><span class='c'></span></div>");
+
+    var W = c(widget);
+    var w = new W($element, "ns");
+    w.one("test", ".x", function () {
+      assert.notOk(true, "handler should never be called");
+    });
+    w.one("test", ".c", function () {
+      assert.ok(true, "handler called");
+    });
+
+    $element
+      .find("span")
+      .trigger("test")
+      .trigger("test");
+  });
+
+  QUnit.test("args.selector can be falsy", function (assert) {
+    assert.expect(1);
+
+    var $element = $("<div><span class='c'></span></div>");
+
+    var W = c(widget);
+    var w = new W($element, "ns");
+    w.one("test", void 0, function () {
+      assert.ok(true, "handler called");
+    });
+
+    $element
+      .trigger("test")
+      .trigger("test");
+  });
+
+  QUnit.test("args.data is passed as $event.data", function (assert) {
+    assert.expect(1);
+
+    var $element = $("<div><span class='c'></span></div>");
+
+    var W = c(widget);
+    var w = new W($element, "ns");
+    w.one("test", void 0, $element, function ($event) {
+      assert.deepEqual($event.data, $element, "data matches");
+    });
+
+    $element
+      .trigger("test")
+      .trigger("test");
   });
 
   QUnit.module("mu-jquery-dom/widget#off");
@@ -443,7 +612,120 @@
     });
     var w = new W($element, "ns");
 
-    $element.trigger("test").trigger("test");
+    $element
+      .trigger("test")
+      .trigger("test");
+  });
+
+  QUnit.test("one/event with ns", function (assert) {
+    assert.expect(1);
+
+    var $element = $("<div></div>");
+    var ns = "ns";
+
+    var W = c(widget, {
+      "one/test": function () {
+        assert.ok(true, "handler called");
+      }
+    });
+    var w = new W($element, ns);
+
+    $element.trigger("test." + ns);
+  });
+
+  QUnit.test("one/event(.selector)", function (assert) {
+    assert.expect(1);
+
+    var $element = $("<div><span class='a'></span></div>");
+
+    var W = c(widget, {
+      "one/test(.a)": function () {
+        assert.ok(true, "handler called");
+      },
+      "one/test(.b)": function () {
+        assert.notOk(true, "handler should never be called");
+      }
+    });
+    var w = new W($element, "ns");
+
+    $element
+      .find("span")
+      .trigger("test");
+  });
+
+  QUnit.test("one/event value.handler", function (assert) {
+    assert.expect(1);
+
+    var $element = $("<div></div>");
+
+    var W = c(widget, {
+      "one/test": {
+        "handler": function () {
+          assert.ok(true, "handler called");
+        }
+      }
+    });
+    var w = new W($element, "ns");
+
+    $element.trigger("test");
+  });
+
+  QUnit.test("one/event value.selector", function (assert) {
+    assert.expect(1);
+
+    var $element = $("<div><span class='c'></span></div>");
+
+    var W = c(widget, {
+      "one/test": {
+        "handler": function () {
+          assert.ok(true, "handler called");
+        },
+        "selector": ".c"
+      }
+    });
+    var w = new W($element, "ns");
+
+    $element
+      .find("span")
+      .trigger("test");
+  });
+
+  QUnit.test("one/event(selector) value.selector override", function (assert) {
+    assert.expect(1);
+
+    var $element = $("<div><span class='c'></span></div>");
+
+    var W = c(widget, {
+      "one/test(.a)": {
+        "handler": function () {
+          assert.ok(true, "handler called");
+        },
+        "selector": ".c"
+      }
+    });
+    var w = new W($element, "ns");
+
+    $element
+      .find("span")
+      .trigger("test");
+  });
+
+  QUnit.test("one/event value.data passed as $event.data", function (assert) {
+    assert.expect(1);
+
+    var $element = $("<div></div>");
+
+    var W = c(widget, {
+      "one/test": {
+        "handler": function ($event) {
+          assert.strictEqual($event.data, $element, "data matches");
+        },
+        "data": $element
+      }
+    });
+    var w = new W($element, "ns");
+
+    $element.trigger("test");
   });
 
   QUnit.module("mu-jquery-dom/widget#dom.attr");
