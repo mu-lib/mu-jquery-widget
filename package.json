@@ -19,7 +19,7 @@
   "dependencies": {},
   "peerDependencies": {
     "jquery": "^3.1.0",
-    "mu-create": "^4.2.1"
+    "mu-create": "^5.0.0"
   },
   "devDependencies": {
     "standard-version": "^2.4.0",
