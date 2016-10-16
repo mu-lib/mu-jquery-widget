@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="8.1.0"></a>
+# [8.1.0](https://github.com/mu-lib/mu-jquery-widget/compare/v8.0.0...v8.1.0) (2016-10-16)
+
+
+### Features
+
+* **packaging:** bumped deps ([075452d](https://github.com/mu-lib/mu-jquery-widget/commit/075452d))
+
+
+
 <a name="8.0.0"></a>
 # [8.0.0](https://github.com/mu-lib/mu-jquery-widget/compare/v7.2.0...v8.0.0) (2016-10-16)
 
