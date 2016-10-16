@@ -23,6 +23,14 @@
   }
 
   var widget = {
+    "trigger": function (events, extraParams) {
+      var me = this;
+      me.$element.trigger(name.call(events, me.ns), extraParams);
+    },
+    "triggerHandler": function (events, extraParams) {
+      var me = this;
+      return me.$element.triggerHandler(name.call(events, me.ns), extraParams);
+    },
     "off": function (events, selector, handler) {
       var me = this;
       me.$element.off(name.call(events, me.ns), selector, handler);
@@ -50,13 +58,6 @@
       }
 
       me.$element[op](name.call(events, me.ns), selector, data, $.proxy(handler, me));
-    };
-  }, widget);
-
-  ["trigger", "triggerHandler"].forEach(function (op) {
-    this[op] = function (events, extraParams) {
-      var me = this;
-      return me.$element[op](name.call(events, me.ns), extraParams);
     };
   }, widget);
 
