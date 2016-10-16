@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="8.0.0"></a>
+# [8.0.0](https://github.com/mu-lib/mu-jquery-widget/compare/v7.2.0...v8.0.0) (2016-10-16)
+
+
+### Bug Fixes
+
+* **widget:** remove trigger and triggerHandler ([f26b6cf](https://github.com/mu-lib/mu-jquery-widget/commit/f26b6cf))
+
+
+### BREAKING CHANGES
+
+* widget: After some thought I've decided to remove support for `trigger` and
+`triggerHandler` as I don't see them promoting any good dev patterns.
+
+
+
 <a name="7.2.0"></a>
 # [7.2.0](https://github.com/mu-lib/mu-jquery-widget/compare/v7.1.0...v7.2.0) (2016-10-16)
 
