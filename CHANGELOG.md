@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="7.2.0"></a>
+# [7.2.0](https://github.com/mu-lib/mu-jquery-widget/compare/v7.1.0...v7.2.0) (2016-10-16)
+
+
+### Bug Fixes
+
+* **tests:** add full tests for one ([2f70eac](https://github.com/mu-lib/mu-jquery-widget/commit/2f70eac))
+* **tests:** test cleanup ([ef6deda](https://github.com/mu-lib/mu-jquery-widget/commit/ef6deda))
+
+
+### Features
+
+* **widget:** added trigger and triggerHandler methods ([258de18](https://github.com/mu-lib/mu-jquery-widget/commit/258de18))
+
+
+
 <a name="7.1.0"></a>
 # [7.1.0](https://github.com/mu-lib/mu-jquery-widget/compare/v7.0.1...v7.1.0) (2016-10-15)
 
