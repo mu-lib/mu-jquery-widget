@@ -99,7 +99,7 @@
     function ok($event, one, _$element) {
       assert.strictEqual(arguments.length, 3, "arguments.length matches");
       assert.ok($event instanceof $.Event, "$event is an instance of $.Event");
-      assert.strictEqual(one, "one", "one matches");
+      assert.strictEqual(one, 1, "one matches");
       assert.strictEqual(_$element, $element, "_$element matches");
     }
 
@@ -114,7 +114,7 @@
       .on("test." + w.ns, ok)
       .appendTo($("<div></div>").on("test." + w.ns, ok));
 
-    w.trigger("test", ["one", $element]);
+    w.trigger("test", [1, $element]);
   });
 
   QUnit.module("mu-jquery-dom/widget#triggerHandler");
@@ -180,12 +180,12 @@
       .on("test." + w.ns, function ok($event, one, _$element) {
         assert.strictEqual(arguments.length, 3, "arguments.length matches");
         assert.ok($event instanceof $.Event, "$event is an instance of $.Event");
-        assert.strictEqual(one, "one", "one matches");
+        assert.strictEqual(one, 1, "one matches");
         assert.strictEqual(_$element, $element, "_$element matches");
       })
       .appendTo($("<div></div>").on("test." + w.ns, notOk));
 
-    w.triggerHandler("test", ["one", $element]);
+    w.triggerHandler("test", [1, $element]);
   });
 
   QUnit.module("mu-jquery-dom/widget#on");
@@ -193,16 +193,16 @@
   QUnit.test("handler called", function (assert) {
     assert.expect(4);
 
+    function ok() {
+      assert.ok(true, "handler called");
+    }
+
     var $element = $("<div></div>");
     var W = c(widget);
     var w = new W($element, "ns");
 
-    w.on("test", function ($event) {
-      assert.ok(true, "handler called");
-    });
-    w.on("test", function () {
-      assert.ok(true, "handler called");
-    });
+    w.on("test", ok);
+    w.on("test", ok);
 
     $element
       .trigger("test")
@@ -212,16 +212,16 @@
   QUnit.test("handler called when trigger on child", function (assert) {
     assert.expect(4);
 
-    var $element = $("<div><span></span></div>");
+    function ok() {
+      assert.ok(true, "handler called");
+    }
 
+    var $element = $("<div><span></span></div>");
     var W = c(widget);
     var w = new W($element, "ns");
-    w.on("test", function () {
-      assert.ok(true, "handler called");
-    });
-    w.on("test", function () {
-      assert.ok(true, "handler called");
-    });
+
+    w.on("test", ok);
+    w.on("test", ok);
 
     $element
       .find("span")
@@ -233,26 +233,27 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-    var ns = "ns";
-
     var W = c(widget);
-    var w = new W($element, ns);
-    w.on("test." + ns, function () {
+    var w = new W($element, "ns");
+
+    w.on("test", function () {
       assert.ok(true, "handler called");
     });
-    $element.trigger("test");
+
+    $element.trigger("test." + w.ns);
   });
 
   QUnit.test("handler called in scope", function (assert) {
     assert.expect(1);
 
     var $element = $("<div></div>");
-
     var W = c(widget);
     var w = new W($element, "ns");
+
     w.on("test", function () {
       assert.strictEqual(this, w, "scope matches");
     });
+
     $element.trigger("test");
   });
 
@@ -260,42 +261,41 @@
     assert.expect(2);
 
     var $element = $("<div></div>");
-    var ns = "ns";
-
     var W = c(widget);
-    var w = new W($element, ns);
-    w.on("test." + ns, function ($event) {
+    var w = new W($element, "ns");
+
+    w.on("test", function ($event) {
       assert.strictEqual(arguments.length, 1, "arguments.length matches");
       assert.ok($event instanceof $.Event, "$event is an instance of $.Event");
     });
+
     $element.trigger("test");
   });
 
   QUnit.test("handler called with extra arguments", function (assert) {
-    assert.expect(5);
+    assert.expect(4);
 
     var $element = $("<div></div>");
-    var ns = "ns";
-
     var W = c(widget);
-    var w = new W($element, ns);
-    w.on("test." + ns, function ($event, one, _ns, _$element) {
-      assert.strictEqual(arguments.length, 4, "arguments.length matches");
+    var w = new W($element, "ns");
+
+    w.on("test", function ($event, one, _$element) {
+      assert.strictEqual(arguments.length, 3, "arguments.length matches");
       assert.ok($event instanceof $.Event, "$event is an instance of $.Event");
       assert.strictEqual(one, 1, "one matches");
-      assert.strictEqual(_ns, ns, "_ns matches");
       assert.strictEqual(_$element, $element, "_$element matches");
     });
-    $element.trigger("test", [1, ns, $element]);
+
+    $element.trigger("test", [1, $element]);
   });
 
   QUnit.test("args.events can be multiple", function (assert) {
     assert.expect(2);
 
     var $element = $("<div></div>");
-
     var W = c(widget);
     var w = new W($element, "ns");
+
     w.on("test1 test2", function () {
       assert.ok(true, "handler called");
     });
@@ -309,9 +309,9 @@
     assert.expect(1);
 
     var $element = $("<div><span class='c'></span></div>");
-
     var W = c(widget);
     var w = new W($element, "ns");
+
     w.on("test", ".x", function () {
       assert.notOk(true, "handler should never be called");
     });
@@ -328,9 +328,9 @@
     assert.expect(1);
 
     var $element = $("<div><span class='c'></span></div>");
-
     var W = c(widget);
     var w = new W($element, "ns");
+
     w.on("test", void 0, function () {
       assert.ok(true, "handler should never be called");
     });
@@ -342,9 +342,9 @@
     assert.expect(1);
 
     var $element = $("<div><span class='c'></span></div>");
-
     var W = c(widget);
     var w = new W($element, "ns");
+
     w.on("test", void 0, $element, function ($event) {
       assert.deepEqual($event.data, $element, "data matches");
     });
@@ -357,16 +357,16 @@
   QUnit.test("handler called once", function (assert) {
     assert.expect(2);
 
+    function ok($event) {
+      assert.ok(true, "handler called");
+    }
+
     var $element = $("<div></div>");
     var W = c(widget);
     var w = new W($element, "ns");
 
-    w.one("test", function ($event) {
-      assert.ok(true, "handler called");
-    });
-    w.one("test", function () {
-      assert.ok(true, "handler called");
-    });
+    w.one("test", ok);
+    w.one("test", ok);
 
     $element
       .trigger("test")
@@ -376,16 +376,16 @@
   QUnit.test("handler called once when trigger on child", function (assert) {
     assert.expect(2);
 
-    var $element = $("<div><span></span></div>");
+    function ok() {
+      assert.ok(true, "handler called");
+    }
 
+    var $element = $("<div><span></span></div>");
     var W = c(widget);
     var w = new W($element, "ns");
-    w.one("test", function () {
-      assert.ok(true, "handler called");
-    });
-    w.one("test", function () {
-      assert.ok(true, "handler called");
-    });
+
+    w.one("test", ok);
+    w.one("test", ok);
 
     $element
       .find("span")
@@ -397,26 +397,27 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-    var ns = "ns";
-
     var W = c(widget);
-    var w = new W($element, ns);
-    w.one("test." + ns, function () {
+    var w = new W($element, "ns");
+
+    w.one("test", function () {
       assert.ok(true, "handler called");
     });
-    $element.trigger("test");
+
+    $element.trigger("test." + w.ns);
   });
 
   QUnit.test("handler called once in scope", function (assert) {
     assert.expect(1);
 
     var $element = $("<div></div>");
-
     var W = c(widget);
     var w = new W($element, "ns");
+
     w.one("test", function () {
       assert.strictEqual(this, w, "scope matches");
     });
+
     $element.trigger("test");
   });
 
@@ -424,42 +425,41 @@
     assert.expect(2);
 
     var $element = $("<div></div>");
-    var ns = "ns";
-
     var W = c(widget);
-    var w = new W($element, ns);
-    w.one("test." + ns, function ($event) {
+    var w = new W($element, "ns");
+
+    w.one("test", function ($event) {
       assert.strictEqual(arguments.length, 1, "arguments.length matches");
       assert.ok($event instanceof $.Event, "$event is an instance of $.Event");
     });
+
     $element.trigger("test");
   });
 
   QUnit.test("handler called once with extra arguments", function (assert) {
-    assert.expect(5);
+    assert.expect(4);
 
     var $element = $("<div></div>");
-    var ns = "ns";
-
     var W = c(widget);
-    var w = new W($element, ns);
-    w.one("test." + ns, function ($event, one, _ns, _$element) {
-      assert.strictEqual(arguments.length, 4, "arguments.length matches");
+    var w = new W($element, "ns");
+
+    w.one("test", function ($event, one, _$element) {
+      assert.strictEqual(arguments.length, 3, "arguments.length matches");
       assert.ok($event instanceof $.Event, "$event is an instance of $.Event");
       assert.strictEqual(one, 1, "one matches");
-      assert.strictEqual(_ns, ns, "_ns matches");
       assert.strictEqual(_$element, $element, "_$element matches");
     });
-    $element.trigger("test", [1, ns, $element]);
+
+    $element.trigger("test", [1, $element]);
   });
 
   QUnit.test("args.events can be multiple", function (assert) {
     assert.expect(2);
 
     var $element = $("<div></div>");
-
     var W = c(widget);
     var w = new W($element, "ns");
+
     w.one("test1 test2", function () {
       assert.ok(true, "handler called");
     });
@@ -475,9 +475,9 @@
     assert.expect(1);
 
     var $element = $("<div><span class='c'></span></div>");
-
     var W = c(widget);
     var w = new W($element, "ns");
+
     w.one("test", ".x", function () {
       assert.notOk(true, "handler should never be called");
     });
@@ -495,9 +495,9 @@
     assert.expect(1);
 
     var $element = $("<div><span class='c'></span></div>");
-
     var W = c(widget);
     var w = new W($element, "ns");
+
     w.one("test", void 0, function () {
       assert.ok(true, "handler called");
     });
@@ -511,9 +511,9 @@
     assert.expect(1);
 
     var $element = $("<div><span class='c'></span></div>");
-
     var W = c(widget);
     var w = new W($element, "ns");
+
     w.one("test", void 0, $element, function ($event) {
       assert.deepEqual($event.data, $element, "data matches");
     });
@@ -528,16 +528,16 @@
   QUnit.test("handlers removed", function (assert) {
     assert.expect(0);
 
-    var $element = $("<div></div>");
+    function notOk() {
+      assert.notOk(true, "handler should never be called");
+    }
 
+    var $element = $("<div></div>");
     var W = c(widget);
     var w = new W($element, "ns");
-    w.on("test", function () {
-      assert.notOk(true, "handler should never be called");
-    });
-    w.on("test", function () {
-      assert.notOk(true, "handler should never be called");
-    });
+
+    w.on("test", notOk);
+    w.on("test", notOk);
     w.off("test");
 
     $element.trigger("test");
@@ -546,28 +546,30 @@
   QUnit.test("args.events can be multiple", function (assert) {
     assert.expect(0);
 
-    var $element = $("<div></div>");
+    function notOk() {
+      assert.notOk(true, "handler should never be called");
+    }
 
+    var $element = $("<div></div>");
     var W = c(widget);
     var w = new W($element, "ns");
-    w.on("test1", function () {
-      assert.notOk(true, "handler should never be called");
-    });
-    w.on("test2", function () {
-      assert.notOk(true, "handler should never be called");
-    });
+
+    w.on("test1", notOk);
+    w.on("test2", notOk);
     w.off("test1 test2");
 
-    $element.trigger("test1").trigger("test2");
+    $element
+      .trigger("test1")
+      .trigger("test2");
   });
 
   QUnit.test("args.selector filters handlers", function (assert) {
     assert.expect(1);
 
     var $element = $("<div><span class='a b'></span></div>");
-
     var W = c(widget);
     var w = new W($element, "ns");
+
     w.on("test", ".a", function () {
       assert.notOk(true, "handler should never be called");
     });
@@ -576,44 +578,47 @@
     });
     w.off("test", ".a");
 
-    $element.find("span").trigger("test");
+    $element
+      .find("span")
+      .trigger("test");
   });
 
   QUnit.test("args.selector can be falsy", function (assert) {
     assert.expect(0);
 
-    var $element = $("<div><span class='c'></span></div>");
+    function notOk() {
+      assert.notOk(true, "handler should never be called");
+    }
 
+    var $element = $("<div><span class='c'></span></div>");
     var W = c(widget);
     var w = new W($element, "ns");
-    w.on("test", ".c", function () {
-      assert.notOk(true, "handler should never be called");
-    });
-    w.on("test", ".c", function () {
-      assert.notOk(true, "handler should never be called");
-    });
+
+    w.on("test", ".c", notOk);
+    w.on("test", ".c", notOk);
     w.off("test", void 0);
 
-    $element.find("span").trigger("test");
+    $element
+      .find("span")
+      .trigger("test");
   });
 
   QUnit.test("args.handler filters handler", function (assert) {
     assert.expect(1);
 
-    var $element = $("<div></div>");
-
-    var W = c(widget);
-    var w = new W($element, "ns");
-
-    function f() {
+    function notOk() {
       assert.notOk(true, "handler should never be called");
     }
 
-    w.on("test", f);
+    var $element = $("<div></div>");
+    var W = c(widget);
+    var w = new W($element, "ns");
+
+    w.on("test", notOk);
     w.on("test", function () {
       assert.ok(true, "handler called");
     });
-    w.off("test", void 0, f);
+    w.off("test", void 0, notOk);
 
     $element.trigger("test");
   });
@@ -624,7 +629,6 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-
     var W = c(widget, {
       "on/test": function () {
         assert.ok(true, "handler called");
@@ -639,23 +643,20 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-    var ns = "ns";
-
     var W = c(widget, {
       "on/test": function () {
         assert.ok(true, "handler called");
       }
     });
-    var w = new W($element, ns);
+    var w = new W($element, "ns");
 
-    $element.trigger("test." + ns);
+    $element.trigger("test." + w.ns);
   });
 
   QUnit.test("on/event(.selector)", function (assert) {
     assert.expect(1);
 
     var $element = $("<div><span class='a'></span></div>");
-
     var W = c(widget, {
       "on/test(.a)": function () {
         assert.ok(true, "handler called");
@@ -666,14 +667,15 @@
     });
     var w = new W($element, "ns");
 
-    $element.find("span").trigger("test");
+    $element
+      .find("span")
+      .trigger("test");
   });
 
   QUnit.test("on/event value.handler", function (assert) {
     assert.expect(1);
 
     var $element = $("<div></div>");
-
     var W = c(widget, {
       "on/test": {
         "handler": function () {
@@ -690,7 +692,6 @@
     assert.expect(1);
 
     var $element = $("<div><span class='c'></span></div>");
-
     var W = c(widget, {
       "on/test": {
         "handler": function () {
@@ -701,14 +702,15 @@
     });
     var w = new W($element, "ns");
 
-    $element.find("span").trigger("test");
+    $element
+      .find("span")
+      .trigger("test");
   });
 
   QUnit.test("on/event(selector) value.selector override", function (assert) {
     assert.expect(1);
 
     var $element = $("<div><span class='c'></span></div>");
-
     var W = c(widget, {
       "on/test(.a)": {
         "handler": function () {
@@ -719,14 +721,15 @@
     });
     var w = new W($element, "ns");
 
-    $element.find("span").trigger("test");
+    $element
+      .find("span")
+      .trigger("test");
   });
 
   QUnit.test("on/event value.data passed as $event.data", function (assert) {
     assert.expect(1);
 
     var $element = $("<div></div>");
-
     var W = c(widget, {
       "on/test": {
         "handler": function ($event) {
@@ -746,7 +749,6 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-
     var W = c(widget, {
       "one/test": function () {
         assert.ok(true, "handler called");
@@ -763,23 +765,20 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-    var ns = "ns";
-
     var W = c(widget, {
       "one/test": function () {
         assert.ok(true, "handler called");
       }
     });
-    var w = new W($element, ns);
+    var w = new W($element, "ns");
 
-    $element.trigger("test." + ns);
+    $element.trigger("test." + w.ns);
   });
 
   QUnit.test("one/event(.selector)", function (assert) {
     assert.expect(1);
 
     var $element = $("<div><span class='a'></span></div>");
-
     var W = c(widget, {
       "one/test(.a)": function () {
         assert.ok(true, "handler called");
@@ -799,7 +798,6 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-
     var W = c(widget, {
       "one/test": {
         "handler": function () {
@@ -816,7 +814,6 @@
     assert.expect(1);
 
     var $element = $("<div><span class='c'></span></div>");
-
     var W = c(widget, {
       "one/test": {
         "handler": function () {
@@ -836,7 +833,6 @@
     assert.expect(1);
 
     var $element = $("<div><span class='c'></span></div>");
-
     var W = c(widget, {
       "one/test(.a)": {
         "handler": function () {
@@ -856,7 +852,6 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-
     var W = c(widget, {
       "one/test": {
         "handler": function ($event) {
@@ -876,7 +871,6 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-
     var W = c(widget, {
       "attr/name": "value"
     });
@@ -889,7 +883,6 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-
     var W = c(widget, {
       "attr/name": {
         "name": "override",
@@ -907,7 +900,6 @@
     var $element = $("<div></div><div></div>").each(function (index, element) {
       $(element).attr("name", "test" + (index + 1));
     });
-
     var W = c(widget, {
       "attr/name": function (index, value) {
         return value + "value" + index;
@@ -926,7 +918,6 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-
     var W = c(widget, {
       "prop/name": "value"
     });
@@ -939,7 +930,6 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-
     var W = c(widget, {
       "prop/name": {
         "name": "override",
@@ -957,7 +947,6 @@
     var $element = $("<div></div><div></div>").each(function (index, element) {
       $(element).prop("name", "test" + (index + 1));
     });
-
     var W = c(widget, {
       "prop/name": function (index, value) {
         return value + "value" + index;
