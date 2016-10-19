@@ -28,6 +28,7 @@
   ["on", "one"].forEach(function (op) {
     this[op] = function (events, selector, data, handler) {
       var me = this;
+      var $element = me.$element;
 
       switch (arguments.length) {
         case 3:
@@ -45,7 +46,7 @@
           throw new Error("not enough arguments");
       }
 
-      me.$element[op](name.call(events, me.ns), selector, data, $.proxy(handler, me));
+      $element[op](name.call(events, me.ns), selector, data, $element.constructor.proxy(handler, me));
     };
   }, widget);
 
@@ -55,7 +56,7 @@
     me.ns = ns;
     me.$element = $element;
 
-    $.each(me.constructor.dom, function (index, op) {
+    $element.constructor.each(me.constructor.dom, function (index, op) {
       switch (op.method) {
         case "on":
         case "one":
