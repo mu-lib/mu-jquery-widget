@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="9.1.0"></a>
+# [9.1.0](https://github.com/mu-lib/mu-jquery-widget/compare/v9.0.1...v9.1.0) (2017-01-23)
+
+
+### Features
+
+* moved support for finalizing widgets from mu-jquery-app ([b710824](https://github.com/mu-lib/mu-jquery-widget/commit/b710824))
+
+
+
 <a name="9.0.1"></a>
 ## [9.0.1](https://github.com/mu-lib/mu-jquery-widget/compare/v9.0.0...v9.0.1) (2016-10-19)
 
