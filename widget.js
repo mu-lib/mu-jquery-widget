@@ -22,6 +22,26 @@
     "off": function (events, selector, handler) {
       var me = this;
       me.$element.off(name.call(events, me.ns), selector, handler);
+    },
+    "on/_remove": function () {
+      this.$element.triggerHandler("finalize." + this.ns);
+    }
+  };
+  var _remove = {
+    "noBubble": true,
+    "trigger": function () {
+      return false;
+    },
+    "remove": function (handleObj) {
+      var me = this;
+
+      if (handleObj.handler) {
+        handleObj.handler.call(me, me.constructor.Event(handleObj.type, {
+          "data": handleObj.data,
+          "namespace": handleObj.namespace,
+          "target": me
+        }));
+      }
     }
   };
 
@@ -52,11 +72,15 @@
 
   return [function ($element, ns) {
     var me = this;
+    var $ = $element.constructor;
+    var $special = $.event.special;
+
+    $special._remove = $special._remove || _remove;
 
     me.ns = ns;
     me.$element = $element;
 
-    $element.constructor.each(me.constructor.dom, function (index, op) {
+    $.each(me.constructor.dom, function (index, op) {
       switch (op.method) {
         case "on":
         case "one":
