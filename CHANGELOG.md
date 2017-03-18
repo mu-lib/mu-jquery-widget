@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="10.0.0"></a>
+# [10.0.0](https://github.com/mu-lib/mu-jquery-widget/compare/v9.1.0...v10.0.0) (2017-03-18)
+
+
+### Bug Fixes
+
+* **packaging:** bumped deps ([a8793a0](https://github.com/mu-lib/mu-jquery-widget/commit/a8793a0))
+
+
+### BREAKING CHANGES
+
+* packaging: Overlapping rules and specs are now filtered
+
+
+
 <a name="9.1.0"></a>
 # [9.1.0](https://github.com/mu-lib/mu-jquery-widget/compare/v9.0.1...v9.1.0) (2017-01-23)
 
