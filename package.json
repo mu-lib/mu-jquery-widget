@@ -16,7 +16,9 @@
     "url": "https://github.com/mu-lib/mu-jquery-widget/issues"
   },
   "homepage": "https://github.com/mu-lib/mu-jquery-widget#readme",
-  "dependencies": {},
+  "dependencies": {
+    "mu-create": "^6.0.0"
+  },
   "peerDependencies": {
     "jquery": "^3.0.0",
     "mu-create": "^6.0.0"

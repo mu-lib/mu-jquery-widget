@@ -14,19 +14,16 @@
 })([
   "qunit",
   "jquery",
-  "../create",
-  "../widget",
-  "../dom"
-], this, function (QUnit, $, create, widget, dom) {
+  "../widget"
+], this, function (QUnit, $, Widget) {
   QUnit.module("mu-jquery-dom/widget#constructor");
 
   QUnit.test("instanceof", function (assert) {
     assert.expect(1);
 
-    var W = create(widget);
-    var w = new W($("<div></div>"), "ns");
+    var w = new Widget($("<div></div>"), "ns");
 
-    assert.ok(w instanceof W, "w is an incence of W");
+    assert.ok(w instanceof Widget, "w is an incence of W");
   });
 
   QUnit.test("arguments", function (assert) {
@@ -35,8 +32,7 @@
     var $element = $("<div></div>");
     var ns = "ns";
 
-    var W = create(widget);
-    var w = new W($element, ns);
+    var w = new Widget($element, ns);
 
     assert.ok(w.$element.is($element), "$element matches");
     assert.strictEqual(w.ns, ns, "ns matches");
@@ -52,8 +48,7 @@
     }
 
     var $element = $("<div></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.on("test", ok);
     w.on("test", ok);
@@ -71,8 +66,7 @@
     }
 
     var $element = $("<div><span></span></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.on("test", ok);
     w.on("test", ok);
@@ -87,8 +81,7 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.on("test", function () {
       assert.ok(true, "handler called");
@@ -101,8 +94,7 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.on("test", function () {
       assert.strictEqual(this, w, "scope matches");
@@ -115,8 +107,7 @@
     assert.expect(2);
 
     var $element = $("<div></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.on("test", function ($event) {
       assert.strictEqual(arguments.length, 1, "arguments.length matches");
@@ -130,8 +121,7 @@
     assert.expect(4);
 
     var $element = $("<div></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.on("test", function ($event, one, _$element) {
       assert.strictEqual(arguments.length, 3, "arguments.length matches");
@@ -147,8 +137,7 @@
     assert.expect(2);
 
     var $element = $("<div></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.on("test1 test2", function () {
       assert.ok(true, "handler called");
@@ -163,8 +152,7 @@
     assert.expect(1);
 
     var $element = $("<div><span class='c'></span></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.on("test", ".x", function () {
       assert.notOk(true, "handler should never be called");
@@ -182,8 +170,7 @@
     assert.expect(1);
 
     var $element = $("<div><span class='c'></span></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.on("test", void 0, function () {
       assert.ok(true, "handler should never be called");
@@ -196,8 +183,7 @@
     assert.expect(1);
 
     var $element = $("<div><span class='c'></span></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.on("test", void 0, $element, function ($event) {
       assert.deepEqual($event.data, $element, "data matches");
@@ -216,8 +202,7 @@
     }
 
     var $element = $("<div></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.one("test", ok);
     w.one("test", ok);
@@ -235,8 +220,7 @@
     }
 
     var $element = $("<div><span></span></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.one("test", ok);
     w.one("test", ok);
@@ -251,8 +235,7 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.one("test", function () {
       assert.ok(true, "handler called");
@@ -265,8 +248,7 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.one("test", function () {
       assert.strictEqual(this, w, "scope matches");
@@ -279,8 +261,7 @@
     assert.expect(2);
 
     var $element = $("<div></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.one("test", function ($event) {
       assert.strictEqual(arguments.length, 1, "arguments.length matches");
@@ -294,8 +275,7 @@
     assert.expect(4);
 
     var $element = $("<div></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.one("test", function ($event, one, _$element) {
       assert.strictEqual(arguments.length, 3, "arguments.length matches");
@@ -311,8 +291,7 @@
     assert.expect(2);
 
     var $element = $("<div></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.one("test1 test2", function () {
       assert.ok(true, "handler called");
@@ -329,8 +308,7 @@
     assert.expect(1);
 
     var $element = $("<div><span class='c'></span></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.one("test", ".x", function () {
       assert.notOk(true, "handler should never be called");
@@ -349,8 +327,7 @@
     assert.expect(1);
 
     var $element = $("<div><span class='c'></span></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.one("test", void 0, function () {
       assert.ok(true, "handler called");
@@ -365,8 +342,7 @@
     assert.expect(1);
 
     var $element = $("<div><span class='c'></span></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.one("test", void 0, $element, function ($event) {
       assert.deepEqual($event.data, $element, "data matches");
@@ -387,8 +363,7 @@
     }
 
     var $element = $("<div></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.on("test", notOk);
     w.on("test", notOk);
@@ -405,8 +380,7 @@
     }
 
     var $element = $("<div></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.on("test1", notOk);
     w.on("test2", notOk);
@@ -421,8 +395,7 @@
     assert.expect(1);
 
     var $element = $("<div><span class='a b'></span></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.on("test", ".a", function () {
       assert.notOk(true, "handler should never be called");
@@ -445,8 +418,7 @@
     }
 
     var $element = $("<div><span class='c'></span></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.on("test", ".c", notOk);
     w.on("test", ".c", notOk);
@@ -465,8 +437,7 @@
     }
 
     var $element = $("<div></div>");
-    var W = create(widget);
-    var w = new W($element, "ns");
+    var w = new Widget($element, "ns");
 
     w.on("test", notOk);
     w.on("test", function () {
@@ -483,7 +454,7 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-    var W = create(widget, {
+    var W = Widget.extend({
       "on/test": function () {
         assert.ok(true, "handler called");
       }
@@ -497,7 +468,7 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-    var W = create(widget, {
+    var W = Widget.extend({
       "on/test": function () {
         assert.ok(true, "handler called");
       }
@@ -511,7 +482,7 @@
     assert.expect(1);
 
     var $element = $("<div><span class='a'></span></div>");
-    var W = create(widget, {
+    var W = Widget.extend({
       "on/test(.a)": function () {
         assert.ok(true, "handler called");
       },
@@ -530,7 +501,7 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-    var W = create(widget, {
+    var W = Widget.extend({
       "on/test": {
         "handler": function () {
           assert.ok(true, "handler called");
@@ -546,7 +517,7 @@
     assert.expect(1);
 
     var $element = $("<div><span class='c'></span></div>");
-    var W = create(widget, {
+    var W = Widget.extend({
       "on/test": {
         "handler": function () {
           assert.ok(true, "handler called");
@@ -565,7 +536,7 @@
     assert.expect(1);
 
     var $element = $("<div><span class='c'></span></div>");
-    var W = create(widget, {
+    var W = Widget.extend({
       "on/test(.a)": {
         "handler": function () {
           assert.ok(true, "handler called");
@@ -584,7 +555,7 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-    var W = create(widget, {
+    var W = Widget.extend({
       "on/test": {
         "handler": function ($event) {
           assert.strictEqual($event.data, $element, "data matches");
@@ -603,7 +574,7 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-    var W = create(widget, {
+    var W = Widget.extend({
       "one/test": function () {
         assert.ok(true, "handler called");
       }
@@ -619,7 +590,7 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-    var W = create(widget, {
+    var W = Widget.extend({
       "one/test": function () {
         assert.ok(true, "handler called");
       }
@@ -633,7 +604,7 @@
     assert.expect(1);
 
     var $element = $("<div><span class='a'></span></div>");
-    var W = create(widget, {
+    var W = Widget.extend({
       "one/test(.a)": function () {
         assert.ok(true, "handler called");
       },
@@ -652,7 +623,7 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-    var W = create(widget, {
+    var W = Widget.extend({
       "one/test": {
         "handler": function () {
           assert.ok(true, "handler called");
@@ -668,7 +639,7 @@
     assert.expect(1);
 
     var $element = $("<div><span class='c'></span></div>");
-    var W = create(widget, {
+    var W = Widget.extend({
       "one/test": {
         "handler": function () {
           assert.ok(true, "handler called");
@@ -687,7 +658,7 @@
     assert.expect(1);
 
     var $element = $("<div><span class='c'></span></div>");
-    var W = create(widget, {
+    var W = Widget.extend({
       "one/test(.a)": {
         "handler": function () {
           assert.ok(true, "handler called");
@@ -706,7 +677,7 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-    var W = create(widget, {
+    var W = Widget.extend({
       "one/test": {
         "handler": function ($event) {
           assert.strictEqual($event.data, $element, "data matches");
@@ -725,7 +696,7 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-    var W = create(widget, {
+    var W = Widget.extend({
       "attr/name": "value"
     });
     var w = new W($element, "ns");
@@ -737,7 +708,7 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-    var W = create(widget, {
+    var W = Widget.extend({
       "attr/name": {
         "name": "override",
         "value": "value"
@@ -754,7 +725,7 @@
     var $element = $("<div></div><div></div>").each(function (index, element) {
       $(element).attr("name", "test" + (index + 1));
     });
-    var W = create(widget, {
+    var W = Widget.extend({
       "attr/name": function (index, value) {
         return value + "value" + index;
       }
@@ -772,7 +743,7 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-    var W = create(widget, {
+    var W = Widget.extend({
       "prop/name": "value"
     });
     var w = new W($element, "ns");
@@ -784,7 +755,7 @@
     assert.expect(1);
 
     var $element = $("<div></div>");
-    var W = create(widget, {
+    var W = Widget.extend({
       "prop/name": {
         "name": "override",
         "value": "value"
@@ -801,7 +772,7 @@
     var $element = $("<div></div><div></div>").each(function (index, element) {
       $(element).prop("name", "test" + (index + 1));
     });
-    var W = create(widget, {
+    var W = Widget.extend({
       "prop/name": function (index, value) {
         return value + "value" + index;
       }

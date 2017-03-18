@@ -4,9 +4,11 @@
   } else if (typeof module === "object" && module.exports) {
     module.exports = factory.call(root);
   } else {
-    root["mu-jquery-widget/widget"] = factory.call(root);
+    root["mu-jquery-widget/widget"] = factory.apply(root, modules.map(function (m) {
+      return root[m.replace(/^\./, "mu-jquery-widget")];
+    }));
   }
-})([], this, function () {
+})(["./create"], this, function (create) {
   var re_space = /\s+/;
 
   function name(ns) {
@@ -70,7 +72,7 @@
     };
   }, widget);
 
-  return [function ($element, ns) {
+  return create(function ($element, ns) {
     var me = this;
     var $ = $element.constructor;
     var $special = $.event.special;
@@ -93,5 +95,5 @@
           break;
       }
     });
-  }, widget];
+  }, widget);
 });
