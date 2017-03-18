@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="10.0.1"></a>
+## [10.0.1](https://github.com/mu-lib/mu-jquery-widget/compare/v10.0.0...v10.0.1) (2017-03-18)
+
+
+### Bug Fixes
+
+* bower version of mu-create mismatch ([2ffbe6f](https://github.com/mu-lib/mu-jquery-widget/commit/2ffbe6f))
+* include correct version of mu-create in tests ([4d62ad7](https://github.com/mu-lib/mu-jquery-widget/commit/4d62ad7))
+
+
+
 <a name="10.0.0"></a>
 # [10.0.0](https://github.com/mu-lib/mu-jquery-widget/compare/v9.1.0...v10.0.0) (2017-03-18)
 
