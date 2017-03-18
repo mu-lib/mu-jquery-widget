@@ -14,7 +14,7 @@
   ],
   "dependencies": {
     "jquery": "^3.0.0",
-    "mu-create": "^5.0.1"
+    "mu-create": "^6.0.0"
   },
   "devDependencies": {
     "qunit": "^2.0.1",
