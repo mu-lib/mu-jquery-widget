@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="12.0.0"></a>
+# [12.0.0](https://github.com/mu-lib/mu-jquery-widget/compare/v11.0.1...v12.0.0) (2017-03-19)
+
+
+* fix(packaging) remove main an streamline package.json ([6c176bb](https://github.com/mu-lib/mu-jquery-widget/commit/6c176bb))
+
+
+### Bug Fixes
+
+* ensure finalize is triggered on dom removal ([6a2bcc4](https://github.com/mu-lib/mu-jquery-widget/commit/6a2bcc4))
+* update group names in tests ([83a54c2](https://github.com/mu-lib/mu-jquery-widget/commit/83a54c2))
+
+
+### Features
+
+* remove widget handlers after finalization ([2ac1f58](https://github.com/mu-lib/mu-jquery-widget/commit/2ac1f58))
+
+
+### BREAKING CHANGES
+
+* removing unused main module.
+
+
+
 <a name="11.0.1"></a>
 ## [11.0.1](https://github.com/mu-lib/mu-jquery-widget/compare/v11.0.0...v11.0.1) (2017-03-19)
 
