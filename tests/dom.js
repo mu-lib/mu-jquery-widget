@@ -16,7 +16,7 @@
 ], this, function (QUnit, dom) {
   var root = this;
 
-  QUnit.module("mu-jquery-dom/dom");
+  QUnit.module("mu-jquery-widget/dom");
 
   QUnit.test("returns undefined if no match", function (assert) {
     var o = {};
@@ -46,7 +46,7 @@
     }), false, "return should be false");
   });
 
-  QUnit.module("mu-jquery-dom/dom#on");
+  QUnit.module("mu-jquery-widget/dom#on");
 
   QUnit.test("handler value", function (assert) {
     var o = {};
@@ -113,7 +113,7 @@
     }, "o.dom should match spec");
   });
 
-  QUnit.module("mu-jquery-dom/dom#one");
+  QUnit.module("mu-jquery-widget/dom#one");
 
   QUnit.test("handler value", function (assert) {
     var o = {};
@@ -180,7 +180,7 @@
     }, "o.dom should match spec");
   });
 
-  QUnit.module("mu-jquery-dom/dom#attr");
+  QUnit.module("mu-jquery-widget/dom#attr");
 
   QUnit.test("value", function (assert) {
     var o = {};
@@ -244,7 +244,7 @@
     }, "o.dom should match spec");
   });
 
-  QUnit.module("mu-jquery-dom/dom#prop");
+  QUnit.module("mu-jquery-widget/dom#prop");
 
   QUnit.test("value", function (assert) {
     var o = {};

@@ -16,7 +16,7 @@
   "jquery",
   "../widget"
 ], this, function (QUnit, $, Widget) {
-  QUnit.module("mu-jquery-dom/widget");
+  QUnit.module("mu-jquery-widget/widget");
 
   QUnit.test("blueprint", function (assert) {
     assert.expect(1);
@@ -112,7 +112,7 @@
       .remove();
   });
 
-  QUnit.module("mu-jquery-dom/widget#constructor");
+  QUnit.module("mu-jquery-widget/widget#constructor");
 
   QUnit.test("instanceof", function (assert) {
     assert.expect(1);
@@ -134,7 +134,7 @@
     assert.strictEqual(w.ns, ns, "ns matches");
   });
 
-  QUnit.module("mu-jquery-dom/widget#on");
+  QUnit.module("mu-jquery-widget/widget#on");
 
   QUnit.test("handler called", function (assert) {
     assert.expect(4);
@@ -288,7 +288,7 @@
     $element.trigger("test");
   });
 
-  QUnit.module("mu-jquery-dom/widget#one");
+  QUnit.module("mu-jquery-widget/widget#one");
 
   QUnit.test("handler called once", function (assert) {
     assert.expect(2);
@@ -449,7 +449,7 @@
       .trigger("test");
   });
 
-  QUnit.module("mu-jquery-dom/widget#off");
+  QUnit.module("mu-jquery-widget/widget#off");
 
   QUnit.test("handlers removed", function (assert) {
     assert.expect(0);
@@ -544,7 +544,7 @@
     $element.trigger("test");
   });
 
-  QUnit.module("mu-jquery-dom/widget#dom.on");
+  QUnit.module("mu-jquery-widget/widget#dom.on");
 
   QUnit.test("on/event", function (assert) {
     assert.expect(1);
@@ -664,7 +664,7 @@
     $element.trigger("test");
   });
 
-  QUnit.module("mu-jquery-dom/widget#dom.one");
+  QUnit.module("mu-jquery-widget/widget#dom.one");
 
   QUnit.test("one/event", function (assert) {
     assert.expect(1);
@@ -786,7 +786,7 @@
     $element.trigger("test");
   });
 
-  QUnit.module("mu-jquery-dom/widget#dom.attr");
+  QUnit.module("mu-jquery-widget/widget#dom.attr");
 
   QUnit.test("attr/name:string", function (assert) {
     assert.expect(1);
@@ -833,7 +833,7 @@
     });
   });
 
-  QUnit.module("mu-jquery-dom/widget#dom.prop");
+  QUnit.module("mu-jquery-widget/widget#dom.prop");
 
   QUnit.test("prop/name:string", function (assert) {
     assert.expect(1);
