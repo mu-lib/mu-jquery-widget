@@ -40,6 +40,37 @@
     assert.deepEqual(C.concat(), Widget.concat(a, b));
   });
 
+  QUnit.test("handler not called when _remove is triggered", function (assert) {
+    assert.expect(1);
+
+    var count = 0;
+    var $element = $("<div></div>");
+    var W = Widget.extend({
+      "on/_remove": function () {
+        assert.ok(count++ === 0, "handler called " + count + " times");
+      }
+    });
+    var w = new W($element, "ns");
+
+    $element
+      .trigger("_remove.ns")
+      .remove();
+  });
+
+  QUnit.test("finalize triggered on .remove()", function (assert) {
+    assert.expect(1);
+
+    var $element = $("<div></div>");
+    var W = Widget.extend({
+      "on/finalize": function () {
+        assert.ok(true, "handler called");
+      }
+    });
+    var w = new W($element, "ns");
+
+    $element.remove();
+  });
+
   QUnit.module("mu-jquery-dom/widget#constructor");
 
   QUnit.test("instanceof", function (assert) {

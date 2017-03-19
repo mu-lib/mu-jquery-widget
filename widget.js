@@ -11,6 +11,10 @@
 })(["./create"], this, function (create) {
   var re_space = /\s+/;
 
+  function falsy() {
+    return false;
+  }
+
   function name(ns) {
     return this
       .split(re_space)
@@ -27,23 +31,6 @@
     },
     "on/_remove": function () {
       this.$element.triggerHandler("finalize." + this.ns);
-    }
-  };
-  var _remove = {
-    "noBubble": true,
-    "trigger": function () {
-      return false;
-    },
-    "remove": function (handleObj) {
-      var me = this;
-
-      if (handleObj.handler) {
-        handleObj.handler.call(me, me.constructor.Event(handleObj.type, {
-          "data": handleObj.data,
-          "namespace": handleObj.namespace,
-          "target": me
-        }));
-      }
     }
   };
 
@@ -77,7 +64,17 @@
     var $ = $element.constructor;
     var $special = $.event.special;
 
-    $special._remove = $special._remove || _remove;
+    $special._remove = $special._remove || {
+      "noBubble": true,
+      "trigger": falsy,
+      "remove": function (handleObj) {
+        handleObj.handler($.Event(handleObj.type, {
+          "data": handleObj.data,
+          "namespace": handleObj.namespace,
+          "target": this
+        }));
+      }
+    };
 
     me.ns = ns;
     me.$element = $element;
