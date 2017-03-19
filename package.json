@@ -2,7 +2,7 @@
   "name": "mu-jquery-widget",
   "version": "11.0.1",
   "description": "mu-create sprinkled jQuery widget",
-  "main": "main.js",
+  "main": "",
   "scripts": {
     "release": "standard-version"
   },
@@ -20,8 +20,7 @@
     "mu-create": "^6.0.1"
   },
   "peerDependencies": {
-    "jquery": "^3.0.0",
-    "mu-create": "^6.0.1"
+    "jquery": "^3.0.0"
   },
   "devDependencies": {
     "standard-version": "^2.4.0",
