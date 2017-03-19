@@ -17,15 +17,15 @@
   },
   "homepage": "https://github.com/mu-lib/mu-jquery-widget#readme",
   "dependencies": {
-    "mu-create": "^6.0.0"
+    "mu-create": "^6.0.1"
   },
   "peerDependencies": {
     "jquery": "^3.0.0",
-    "mu-create": "^6.0.0"
+    "mu-create": "^6.0.1"
   },
   "devDependencies": {
     "standard-version": "^2.4.0",
     "qunitjs": "^2.0.1",
-    "jquery": "^3.1.1"
+    "jquery": "^3.0.0"
   }
 }

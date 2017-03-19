@@ -16,6 +16,30 @@
   "jquery",
   "../widget"
 ], this, function (QUnit, $, Widget) {
+  QUnit.module("mu-jquery-dom/widget");
+
+  QUnit.test("blueprint", function (assert) {
+    assert.expect(1);
+
+    var A = Widget.extend({
+      "key1": "value"
+    });
+    var B = Widget.extend({
+      "key2": "value"
+    });
+    var C = A.extend(B.concat());
+    var a = {
+      "key": "key1",
+      "value": "value"
+    };
+    var b = {
+      "key": "key2",
+      "value": "value"
+    };
+
+    assert.deepEqual(C.concat(), Widget.concat(a, b));
+  });
+
   QUnit.module("mu-jquery-dom/widget#constructor");
 
   QUnit.test("instanceof", function (assert) {
@@ -23,7 +47,7 @@
 
     var w = new Widget($("<div></div>"), "ns");
 
-    assert.ok(w instanceof Widget, "w is an incence of W");
+    assert.ok(w instanceof Widget, "w is an incence of Widget");
   });
 
   QUnit.test("arguments", function (assert) {
