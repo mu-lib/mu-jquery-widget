@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="11.0.1"></a>
+## [11.0.1](https://github.com/mu-lib/mu-jquery-widget/compare/v11.0.0...v11.0.1) (2017-03-19)
+
+
+### Bug Fixes
+
+* bumped mu-create[@6](https://github.com/6).0.1 ([7453482](https://github.com/mu-lib/mu-jquery-widget/commit/7453482))
+
+
+
 <a name="11.0.0"></a>
 # [11.0.0](https://github.com/mu-lib/mu-jquery-widget/compare/v10.1.0...v11.0.0) (2017-03-18)
 
