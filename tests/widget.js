@@ -40,6 +40,61 @@
     assert.deepEqual(C.concat(), Widget.concat(a, b));
   });
 
+  QUnit.test("finalize removes handlers sync", function (assert) {
+    assert.expect(1);
+
+    var count = 0;
+    var $element = $("<div></div>");
+    var W = Widget.extend({
+      "on/test": function () {
+        assert.ok(count++ === 0, "handler called " + count + " times");
+      }
+    });
+    var w = new W($element, "ns");
+
+    $element
+      .trigger("test")
+      .trigger("finalize.ns")
+      .trigger("test");
+  });
+
+  QUnit.test("finalize removes handlers async", function (assert) {
+    assert.expect(2);
+
+    var count = 0;
+    var $element = $("<div></div>");
+    var W = Widget.extend({
+      "on/test": function () {
+        assert.ok(count++ <= 1, "handler called " + count + " times");
+      }
+    });
+    var w = new W($element, "ns");
+    var c = $.Callbacks("once");
+
+    $element
+      .trigger("test")
+      .trigger("finalize.ns", c.add)
+      .trigger("test");
+
+    c.fire();
+
+    $element.trigger("test");
+  });
+
+  QUnit.test("finalize triggered on .remove()", function (assert) {
+    assert.expect(1);
+
+    var $element = $("<div></div>");
+    var W = Widget.extend({
+      "on/finalize": function () {
+        assert.ok(true, "handler called");
+      }
+    });
+    var w = new W($element, "ns");
+
+    $element.remove();
+  });
+
   QUnit.test("handler not called when _remove is triggered", function (assert) {
     assert.expect(1);
 
@@ -55,20 +110,6 @@
     $element
       .trigger("_remove.ns")
       .remove();
-  });
-
-  QUnit.test("finalize triggered on .remove()", function (assert) {
-    assert.expect(1);
-
-    var $element = $("<div></div>");
-    var W = Widget.extend({
-      "on/finalize": function () {
-        assert.ok(true, "handler called");
-      }
-    });
-    var w = new W($element, "ns");
-
-    $element.remove();
   });
 
   QUnit.module("mu-jquery-dom/widget#constructor");

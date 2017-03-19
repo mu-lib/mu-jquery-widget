@@ -27,10 +27,25 @@
   var widget = {
     "off": function (events, selector, handler) {
       var me = this;
-      me.$element.off(name.call(events, me.ns), selector, handler);
+      me.$element.off(name.call(events || "", me.ns), selector, handler);
     },
     "on/_remove": function () {
-      this.$element.triggerHandler("finalize." + this.ns);
+      var me = this;
+      var $element = me.$element;
+      var finalized = $element.constructor.Callbacks("once");
+      $element.triggerHandler("finalize." + me.ns, finalized.add);
+      finalized.fire();
+    },
+    "on/finalize": function ($event, cb) {
+      var me = this;
+      if (cb) {
+        cb(function () {
+          me.off();
+        });
+      }
+      else {
+        me.off();
+      }
     }
   };
 
