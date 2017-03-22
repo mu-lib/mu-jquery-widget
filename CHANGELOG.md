@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="13.0.0"></a>
+# [13.0.0](https://github.com/mu-lib/mu-jquery-widget/compare/v12.0.0...v13.0.0) (2017-03-22)
+
+
+### Features
+
+* finalize.callback called with result ([05a5db9](https://github.com/mu-lib/mu-jquery-widget/commit/05a5db9))
+
+
+### BREAKING CHANGES
+
+* The removal of event handlers in `finalize` is removed in this commit as it's just as easy to do `w.off()` on your own when needed.
+
+
+
 <a name="12.0.0"></a>
 # [12.0.0](https://github.com/mu-lib/mu-jquery-widget/compare/v11.0.1...v12.0.0) (2017-03-19)
 
