@@ -64,7 +64,7 @@
 
   return create(function ($element, ns) {
     var me = this;
-    var $ = $element.constructor;
+    var $ = me.$ = $element.constructor;
     var $special = $.event.special;
 
     $special._remove = $special._remove || {
