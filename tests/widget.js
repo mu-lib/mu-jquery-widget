@@ -40,6 +40,18 @@
     assert.deepEqual(C.concat(), Widget.concat(a, b));
   });
 
+  QUnit.test("instance variables", function (assert) {
+    assert.expect(3);
+
+    var $element = $("<div></div>");
+    var ns = "ns";
+    var w = new Widget($element, ns);
+
+    assert.equal(w.$element, $element, "w.$element equals $element");
+    assert.equal(w.$, $, "w.$ equals $");
+    assert.equal(w.ns, ns, "w.ns equals ns");
+  });
+
   QUnit.test("finalize triggered on .remove()", function (assert) {
     assert.expect(1);
 
