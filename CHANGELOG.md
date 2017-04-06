@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="13.1.0"></a>
+# [13.1.0](https://github.com/mu-lib/mu-jquery-widget/compare/v13.0.0...v13.1.0) (2017-04-06)
+
+
+### Bug Fixes
+
+* bumped deps ([ce3753c](https://github.com/mu-lib/mu-jquery-widget/commit/ce3753c))
+
+
+### Features
+
+* added widget.$ ([5917bac](https://github.com/mu-lib/mu-jquery-widget/commit/5917bac))
+
+
+
 <a name="13.0.0"></a>
 # [13.0.0](https://github.com/mu-lib/mu-jquery-widget/compare/v12.0.0...v13.0.0) (2017-03-22)
 
