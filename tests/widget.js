@@ -72,7 +72,7 @@
     var $element = $("<div></div>");
     var W = Widget.extend({
       "on/finalize": function ($event, finalized) {
-        finalized(function(result) {
+        finalized(function (result) {
           assert.ok(true, "handler called");
           assert.equal("result", result, "result matches");
         });
@@ -822,6 +822,21 @@
     });
   });
 
+  QUnit.test("attr/name:function executed in context", function (assert) {
+    assert.expect(1);
+
+    var $element = $("<div></div>");
+    var W = Widget.extend({
+      "attr/name": function (index, value) {
+        widget = this;
+      }
+    });
+    var w = new W($element, "ns");
+    var widget;
+
+    assert.strictEqual(widget, w, "widget context matches");
+  });
+
   QUnit.module("mu-jquery-widget/widget#dom.prop");
 
   QUnit.test("prop/name:string", function (assert) {
@@ -867,5 +882,20 @@
     $element.each(function (index, element) {
       assert.strictEqual($(element).prop("name"), "test" + (index + 1) + "value" + index, "prop matches");
     });
+  });
+
+  QUnit.test("prop/name:function executed in context", function (assert) {
+    assert.expect(1);
+
+    var $element = $("<div></div>");
+    var W = Widget.extend({
+      "prop/name": function (index, value) {
+        widget = this;
+      }
+    });
+    var w = new W($element, "ns");
+    var widget;
+
+    assert.strictEqual(widget, w, "widget context matches");
   });
 });
