@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="13.2.0"></a>
+# [13.2.0](https://github.com/mu-lib/mu-jquery-widget/compare/v13.1.2...v13.2.0) (2017-04-09)
+
+
+### Bug Fixes
+
+* use me.$ vs $element.constructor ([62bd05c](https://github.com/mu-lib/mu-jquery-widget/commit/62bd05c))
+
+
+### Features
+
+* added trigger and triggerHandler ([7fd1f6c](https://github.com/mu-lib/mu-jquery-widget/commit/7fd1f6c))
+* extended widget ([c3a9e6f](https://github.com/mu-lib/mu-jquery-widget/commit/c3a9e6f))
+
+
+
 <a name="13.1.2"></a>
 ## [13.1.2](https://github.com/mu-lib/mu-jquery-widget/compare/v13.1.1...v13.1.2) (2017-04-07)
 
