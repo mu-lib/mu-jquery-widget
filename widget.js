@@ -31,16 +31,14 @@
     },
     "on/_remove": function () {
       var me = this;
-      var $element = me.$element;
-      var finalized = $element.constructor.Callbacks("once");
-      finalized.fire($element.triggerHandler("finalize." + me.ns, finalized.add));
+      var finalized = me.$.Callbacks("once");
+      finalized.fire(me.$element.triggerHandler("finalize." + me.ns, finalized.add));
     }
   };
 
   ["on", "one"].forEach(function (op) {
     this[op] = function (events, selector, data, handler) {
       var me = this;
-      var $element = me.$element;
 
       switch (arguments.length) {
         case 3:
@@ -58,7 +56,7 @@
           throw new Error("not enough arguments");
       }
 
-      $element[op](name.call(events, me.ns), selector, data, $element.constructor.proxy(handler, me));
+      me.$element[op](name.call(events, me.ns), selector, data, me.$.proxy(handler, me));
     };
   }, widget);
 
