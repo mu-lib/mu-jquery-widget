@@ -60,6 +60,14 @@
     };
   }, widget);
 
+  ["trigger", "triggerHandler"].forEach(function (op) {
+    this[op] = function (events, args) {
+      var me = this;
+      var result = me.$element[op](name.call(events, me.ns), args);
+      return op === "trigger" ? me : result;
+    };
+  }, widget);
+
   return create(function ($element, ns) {
     var me = this;
     var $ = me.$ = $element.constructor;

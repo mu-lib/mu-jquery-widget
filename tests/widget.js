@@ -52,7 +52,9 @@
     assert.equal(w.ns, ns, "w.ns equals ns");
   });
 
-  QUnit.test("finalize triggered on .remove()", function (assert) {
+  QUnit.module("mu-jquery-widget/widget#finalize");
+
+  QUnit.test("triggered on .remove()", function (assert) {
     assert.expect(1);
 
     var $element = $("<div></div>");
@@ -66,7 +68,7 @@
     $element.remove();
   });
 
-  QUnit.test("finalize called with $.Callbacks", function (assert) {
+  QUnit.test("called with $.Callbacks", function (assert) {
     assert.expect(2);
 
     var $element = $("<div></div>");
@@ -121,6 +123,30 @@
 
     assert.ok(w.$element.is($element), "$element matches");
     assert.strictEqual(w.ns, ns, "ns matches");
+  });
+
+  QUnit.module("mu-jquery-widget/widget#triggers");
+
+  QUnit.test("trigger", function (assert) {
+    assert.expect(2);
+
+    var $element = $("<div></div>").on("test.ns", function () {
+      assert.ok(true, "handler called");
+    });
+    var w = new Widget($element, "ns");
+
+    assert.equal(w.trigger("test"), w, "returns widget");
+  });
+
+  QUnit.test("triggerHandler", function (assert) {
+    assert.expect(1);
+
+    var $element = $("<div></div>").on("test.ns", function () {
+      return "test";
+    });
+    var w = new Widget($element, "ns");
+
+    assert.equal(w.triggerHandler("test"), "test", "returns result");
   });
 
   QUnit.module("mu-jquery-widget/widget#on");
