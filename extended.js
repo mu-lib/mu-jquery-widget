@@ -11,17 +11,15 @@
 })(["./widget"], this, function (widget) {
   var methods = ["addClass", "append", "appendTo", "attr", "css", "data", "empty", "hasClass", "html", "is", "insertAfter", "insertBefore", "prependTo", "prop", "removeAttr", "removeClass", "removeProp", "text", "toggleClass", "val", "wrap"];
 
-  function blueprint(method) {
-    return {
-      "key": method,
-      "value": function () {
-        var me = this;
-        var $element = me.$element;
-        var result = $element[method].apply($element, arguments);
-        return result instanceof $element.constructor ? me : result;
-      }
+  function draw(blueprint, method) {
+    blueprint[method] = function () {
+      var me = this;
+      var $element = me.$element;
+      var result = $element[method].apply($element, arguments);
+      return result instanceof $element.constructor ? me : result;
     };
+    return blueprint;
   }
 
-  return widget.extend(methods.map(blueprint));
+  return widget.extend(methods.reduce(draw, {}));
 });
