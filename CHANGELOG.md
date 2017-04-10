@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="14.0.0"></a>
+# [14.0.0](https://github.com/mu-lib/mu-jquery-widget/compare/v13.2.0...v14.0.0) (2017-04-10)
+
+
+### Features
+
+* evolve extended to jquery ([187d2f1](https://github.com/mu-lib/mu-jquery-widget/commit/187d2f1))
+
+
+### BREAKING CHANGES
+
+* `mu-jquery-widget/extended` has been removed and superseeded by `mu-jquery-widget/jquery`.
+
+
+
 <a name="13.2.0"></a>
 # [13.2.0](https://github.com/mu-lib/mu-jquery-widget/compare/v13.1.2...v13.2.0) (2017-04-09)
 
