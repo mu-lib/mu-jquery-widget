@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "standard-version": "^4.0.0",
-    "qunitjs": "^2.3.0",
+    "qunitjs": "^2.3.2",
     "jquery": "^3.2.1"
   }
 }
