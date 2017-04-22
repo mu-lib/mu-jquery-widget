@@ -33,6 +33,10 @@
       var me = this;
       var finalized = me.$.Callbacks("once");
       finalized.fire(me.$element.triggerHandler("finalize." + me.ns, finalized.add));
+    },
+    "triggerHandler": function (events, args) {
+      var me = this;
+      return me.$element.triggerHandler(name.call(events, me.ns), args);
     }
   };
 
@@ -57,14 +61,6 @@
       }
 
       me.$element[op](name.call(events, me.ns), selector, data, me.$.proxy(handler, me));
-    };
-  }, widget);
-
-  ["trigger", "triggerHandler"].forEach(function (op) {
-    this[op] = function (events, args) {
-      var me = this;
-      var result = me.$element[op](name.call(events, me.ns), args);
-      return op === "trigger" ? me : result;
     };
   }, widget);
 

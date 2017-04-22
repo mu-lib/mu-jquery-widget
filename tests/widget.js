@@ -128,17 +128,6 @@
 
   QUnit.module("mu-jquery-widget/widget#triggers");
 
-  QUnit.test("trigger", function (assert) {
-    assert.expect(2);
-
-    var $element = $("<div></div>").on("test.ns", function () {
-      assert.ok(true, "handler called");
-    });
-    var w = new Widget($element, "ns");
-
-    assert.equal(w.trigger("test"), w, "returns widget");
-  });
-
   QUnit.test("triggerHandler", function (assert) {
     assert.expect(1);
 
