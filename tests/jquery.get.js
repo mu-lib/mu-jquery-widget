@@ -4,7 +4,7 @@
   } else if (typeof module === "object" && module.exports) {
     module.exports = factory.apply(root, modules.map(require));
   } else {
-    root["mu-jquery-widget/tests/get"] = factory.apply(root, modules.map(function (m) {
+    root["mu-jquery-widget/tests/jquery.get"] = factory.apply(root, modules.map(function (m) {
       return this[m] || root[m.replace(/^\.{2}/, "mu-jquery-widget")];
     }, {
         "qunit": root.QUnit,
@@ -14,11 +14,11 @@
 })([
   "qunit",
   "jquery",
-  "../get",
+  "../jquery.get",
 ], this, function (QUnit, $, get) {
   var expando = $.expando;
 
-  QUnit.module("mu-jquery-widget/get");
+  QUnit.module("mu-jquery-widget/jquery.get");
 
   QUnit.test("returns empty array if no match", function (assert) {
     assert.expect(1);
@@ -48,5 +48,28 @@
       .data(expando + "#test2", "test2");
 
     assert.deepEqual(get.call($element), ["test1", "test2"], "should match data");
+  });
+
+  QUnit.test("gets from all elements in $elements", function (assert) {
+    assert.expect(1);
+
+    var $elements = $("<div></div><div></div>");
+
+    $elements.eq(0).data(expando + "#test1", "test1")
+    $elements.eq(1).data(expando + "#test2", "test2");
+
+    assert.deepEqual(get.call($elements), ["test1", "test2"], "should match data");
+  });
+
+  QUnit.test("only unique values are returned", function (assert) {
+    assert.expect(1);
+
+    var $elements = $("<div></div><div></div>");
+
+    $elements.eq(0).data(expando + "#test1", "test1")
+    $elements.eq(0).data(expando + "#test2", "test2")
+    $elements.eq(1).data(expando + "#test2", "test2");
+
+    assert.deepEqual(get.call($elements), ["test1", "test2"], "should match data");
   });
 });
