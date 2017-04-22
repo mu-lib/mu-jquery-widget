@@ -10,8 +10,11 @@
   return function (search) {
     var me = this;
     var $ = me.constructor;
+
+    search = $.expando + "#" + (search || "");
+
     return $.map(me.data(), function (value, key) {
-      return key.startsWith($.expando + "#" + search) ? value : undefined;
+      return key.startsWith(search) ? value : undefined;
     });
   }
 });

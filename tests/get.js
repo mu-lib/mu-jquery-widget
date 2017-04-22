@@ -23,7 +23,7 @@
   QUnit.test("returns empty array if no match", function (assert) {
     assert.expect(1);
 
-    var $element = $("<div>").data("test", "test");
+    var $element = $("<div>");
 
     assert.deepEqual(get.call($element, "xxx"), [], "should match empty array");
   });
@@ -36,6 +36,17 @@
       .data(expando + "#ztest", "ztest")
       .data(expando + "#tests", "tests");
 
-    assert.deepEqual(get.call($element, "test"), [ "test", "tests" ], "should match data");
+    assert.deepEqual(get.call($element, "test"), ["test", "tests"], "should match data");
+  });
+
+  QUnit.test("returns data that starts with signature if search is empty", function (assert) {
+    assert.expect(1);
+
+    var $element = $("<div>")
+      .data(expando + "#test1", "test1")
+      .data("skip", "this")
+      .data(expando + "#test2", "test2");
+
+    assert.deepEqual(get.call($element), ["test1", "test2"], "should match data");
   });
 });
