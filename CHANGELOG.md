@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="15.1.0"></a>
+# [15.1.0](https://github.com/mu-lib/mu-jquery-widget/compare/v15.0.0...v15.1.0) (2017-04-22)
+
+
+### Features
+
+* default search to empty string ([6506d1c](https://github.com/mu-lib/mu-jquery-widget/commit/6506d1c))
+
+
+
 <a name="15.0.0"></a>
 # [15.0.0](https://github.com/mu-lib/mu-jquery-widget/compare/v14.0.0...v15.0.0) (2017-04-22)
 
