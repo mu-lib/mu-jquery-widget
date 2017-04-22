@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="17.0.0"></a>
+# [17.0.0](https://github.com/mu-lib/mu-jquery-widget/compare/v16.0.0...v17.0.0) (2017-04-22)
+
+
+### Bug Fixes
+
+* refactored jquery.expr ([6e9a824](https://github.com/mu-lib/mu-jquery-widget/commit/6e9a824))
+
+
+### BREAKING CHANGES
+
+* `jquery.expr` has moved and had it's signature changed.
+
+
+
 <a name="16.0.0"></a>
 # [16.0.0](https://github.com/mu-lib/mu-jquery-widget/compare/v15.1.0...v16.0.0) (2017-04-22)
 
