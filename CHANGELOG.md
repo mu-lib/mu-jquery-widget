@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="16.0.0"></a>
+# [16.0.0](https://github.com/mu-lib/mu-jquery-widget/compare/v15.1.0...v16.0.0) (2017-04-22)
+
+
+### Features
+
+* added expr ([7da0f18](https://github.com/mu-lib/mu-jquery-widget/commit/7da0f18))
+* get from multiple $elements ([5ac2707](https://github.com/mu-lib/mu-jquery-widget/commit/5ac2707))
+* move jquery to external package ([372bac7](https://github.com/mu-lib/mu-jquery-widget/commit/372bac7))
+
+
+### BREAKING CHANGES
+
+* Deprecated `mu-jquery-widget/jquery` in favour of `mu-jquery-widget-utils/jquery`.
+* `mu-jquery-widget/get` has moved to `mu-jquery-widget/jquery.get`.
+
+
+
 <a name="15.1.0"></a>
 # [15.1.0](https://github.com/mu-lib/mu-jquery-widget/compare/v15.0.0...v15.1.0) (2017-04-22)
 
