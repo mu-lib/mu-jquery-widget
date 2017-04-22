@@ -32,7 +32,7 @@
     "on/_remove": function () {
       var me = this;
       var finalized = me.$.Callbacks("once");
-      finalized.fire(me.$element.triggerHandler("finalize." + me.ns, finalized.add));
+      finalized.fire(me.triggerHandler("finalize", finalized.add));
     },
     "triggerHandler": function (events, args) {
       var me = this;
