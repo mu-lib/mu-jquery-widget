@@ -4,7 +4,7 @@
   } else if (typeof module === "object" && module.exports) {
     module.exports = factory.apply(root, modules);
   } else {
-    root["mu-jquery-widget/jquery.expr"] = factory.apply(root, modules);
+    root["mu-jquery-widget/expr"] = factory.apply(root, modules);
   }
 })([], this, function () {
   function matches($, element, search) {
@@ -14,8 +14,7 @@
     });
   }
 
-  return function () {
-    var $ = this;
+  return function ($) {
     return $.expr.createPseudo
       ? $.expr.createPseudo(function(search) {
         return function(element) {

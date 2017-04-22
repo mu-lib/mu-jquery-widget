@@ -4,7 +4,7 @@
   } else if (typeof module === "object" && module.exports) {
     module.exports = factory.apply(root, modules.map(require));
   } else {
-    root["mu-jquery-widget/tests/jquery.expr"] = factory.apply(root, modules.map(function (m) {
+    root["mu-jquery-widget/tests/expr"] = factory.apply(root, modules.map(function (m) {
       return this[m] || root[m.replace(/^\.{2}/, "mu-jquery-widget")];
     }, {
         "qunit": root.QUnit,
@@ -14,16 +14,16 @@
 })([
   "qunit",
   "jquery",
-  "../jquery.expr",
+  "../expr",
 ], this, function (QUnit, $, expr) {
   var expando = $.expando;
-  var name = "mu-jquery-widget/jquery.expr";
+  var name = "mu-jquery-widget/expr";
 
   QUnit.module(name);
 
   QUnit.testStart(function(details) {
     if (details.module.startsWith(name)) {
-      $.expr[":"].widget = expr.call($);
+      $.expr[":"].widget = expr($);
     }
   });
 
