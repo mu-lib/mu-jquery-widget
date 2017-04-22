@@ -101,5 +101,7 @@
           break;
       }
     });
+
+    $element.data($.expando + "#" + ns, me);
   }, widget);
 });

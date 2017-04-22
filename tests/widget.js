@@ -41,12 +41,13 @@
   });
 
   QUnit.test("instance variables", function (assert) {
-    assert.expect(3);
+    assert.expect(4);
 
     var $element = $("<div></div>");
     var ns = "ns";
     var w = new Widget($element, ns);
 
+    assert.equal($element.data($element.constructor.expando + "#" + ns), w, "$element.data[$.expando + '#' + ns] equals w");
     assert.equal(w.$element, $element, "w.$element equals $element");
     assert.equal(w.$, $, "w.$ equals $");
     assert.equal(w.ns, ns, "w.ns equals ns");
