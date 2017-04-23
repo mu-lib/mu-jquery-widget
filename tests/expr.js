@@ -69,4 +69,12 @@
 
     assert.deepEqual($elements.filter(":widget").get(), [ $element1.get(0), $element2.get(0) ] , "finds matching elements");
   });
+
+  QUnit.test("camelCase selector", function (assert) {
+    assert.expect(1);
+
+    var $element = $("<div>").data(expando + "#camel-case", "test");
+
+    assert.ok($element.is(":widget(camel-case)"), "selector matches");
+  });
 });
