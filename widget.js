@@ -84,7 +84,7 @@
     me.ns = ns;
     me.$element = $element;
 
-    $.each(me.constructor.dom, function (index, op) {
+    me.constructor.dom.forEach(function (op, index) {
       switch (op.method) {
         case "on":
         case "one":
