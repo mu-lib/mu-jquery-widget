@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="17.0.2"></a>
+## [17.0.2](https://github.com/mu-lib/mu-jquery-widget/compare/v17.0.1...v17.0.2) (2017-04-23)
+
+
+### Bug Fixes
+
+* use native forEach vs $.each ([5f3fc33](https://github.com/mu-lib/mu-jquery-widget/commit/5f3fc33))
+
+
+
 <a name="17.0.1"></a>
 ## [17.0.1](https://github.com/mu-lib/mu-jquery-widget/compare/v17.0.0...v17.0.1) (2017-04-23)
 
