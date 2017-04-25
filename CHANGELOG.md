@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="17.0.3"></a>
+## [17.0.3](https://github.com/mu-lib/mu-jquery-widget/compare/v17.0.2...v17.0.3) (2017-04-25)
+
+
+### Bug Fixes
+
+* support camel-case escaping in jquery.get search param ([fa69836](https://github.com/mu-lib/mu-jquery-widget/commit/fa69836))
+
+
+
 <a name="17.0.2"></a>
 ## [17.0.2](https://github.com/mu-lib/mu-jquery-widget/compare/v17.0.1...v17.0.2) (2017-04-23)
 
