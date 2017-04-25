@@ -72,4 +72,12 @@
 
     assert.deepEqual(get.call($elements), ["test1", "test2"], "should match data");
   });
+
+  QUnit.test("camelCase search", function (assert) {
+    assert.expect(1);
+
+    var $element = $("<div>").data(expando + "#camel-case", "test");
+
+    assert.deepEqual(get.call($element, "camel-case"), ["test"], "should match data");
+  });
 });

@@ -12,9 +12,9 @@
     var $ = me.constructor;
     var values = {};
 
-    search = $.expando + "#" + (search || "");
+    search = $.expando + "#" + $.camelCase(search || "");
 
-    return $.map(me, function(element) {
+    return $.map(me, function (element) {
       return $.map($.data(element), function (value, key) {
         return values.hasOwnProperty(key) ? undefined : values[key] = key.startsWith(search) ? value : undefined;
       });
