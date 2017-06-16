@@ -1,14 +1,12 @@
-(function (modules, root, factory) {
+(function (root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(modules, factory);
+    define(["mu-create/regexp"], factory);
   } else if (typeof module === "object" && module.exports) {
-    module.exports = factory.apply(root, modules.map(require));
+    module.exports = factory(require("mu-create/regexp"));
   } else {
-    root["mu-jquery-widget/dom"] = factory.apply(root, modules.map(function (m) {
-      return root[m];
-    }));
+    root["mu-jquery-widget/dom"] = factory(root["mu-create/regexp"]);
   }
-})(["mu-create/regexp"], this, function (regexp) {
+})(this, function (regexp) {
   var toString = Object.prototype.toString;
   var re_on = /^one?$/;
 

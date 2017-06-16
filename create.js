@@ -1,13 +1,11 @@
-(function (modules, root, factory) {
+(function (root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(modules, factory);
+    define(["mu-create/create", "mu-create/constructor", "mu-create/prototype", "./dom"], factory);
   } else if (typeof module === "object" && module.exports) {
-    module.exports = factory.apply(root, modules.map(require));
+    module.exports = factory(require("mu-create/create"), require("mu-create/constructor"), require("mu-create/prototype"), require("./dom"));
   } else {
-    root["mu-jquery-widget/create"] = factory.apply(root, modules.map(function (m) {
-      return root[m.replace(/^\./, "mu-jquery-widget")];
-    }));
+    root["mu-jquery-widget/create"] = factory(root["mu-create/create"], root["mu-create/constructor"], root["mu-create/prototype"], root["mu-jquery-widget/dom"]);
   }
-})(["mu-create/create", "mu-create/constructor", "mu-create/prototype", "./dom"], this, function (create, construct, proto, dom) {
+})(this, function (create, construct, proto, dom) {
   return create(construct, dom, proto);
 });

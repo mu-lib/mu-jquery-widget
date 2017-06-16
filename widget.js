@@ -1,14 +1,12 @@
-(function (modules, root, factory) {
+(function (root, factory) {
   if (typeof define === "function" && define.amd) {
-    define(modules, factory);
+    define(["./create"], factory);
   } else if (typeof module === "object" && module.exports) {
-    module.exports = factory.call(root);
+    module.exports = factory(require("./create"));
   } else {
-    root["mu-jquery-widget/widget"] = factory.apply(root, modules.map(function (m) {
-      return root[m.replace(/^\./, "mu-jquery-widget")];
-    }));
+    root["mu-jquery-widget/widget"] = factory(root["mu-jquery-widget/create"]);
   }
-})(["./create"], this, function (create) {
+})(this, function (create) {
   var re_space = /\s+/;
 
   function falsy() {
